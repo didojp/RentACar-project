@@ -185,8 +185,6 @@ class CarController extends Controller
         $form = $this->createDeleteForm($car);
 
         $form->handleRequest($request);
-        var_dump('eho');
-        exit;
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -213,6 +211,7 @@ class CarController extends Controller
             ->setMethod('DELETE')
             ->getForm();
     }
+
 
     /**
      * @return string

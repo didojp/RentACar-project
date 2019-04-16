@@ -81,10 +81,41 @@ class Car
      */
     private $image;
 
+    /**
+     * @var boolean
+     * @ORM\Column(name="is_booked", type="boolean", nullable=false)
+     */
+    private $isBooked;
+
+    /**
+     * @var ArrayCollection|Booking[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Booking",mappedBy="car")
+     */
+    private $booking;
+
+    /**
+     * @return bool
+     */
+    public function isBooked(): bool
+    {
+        return $this->isBooked;
+    }
+
+    /**
+     * @param bool $isBooked
+     */
+    public function setIsBooked(bool $isBooked): void
+    {
+        $this->isBooked = $isBooked;
+    }
+
+
+
 
     public function __construct()
     {
         $this->deal=new ArrayCollection();
+        $this->booking=new ArrayCollection();
 
     }
 
@@ -201,7 +232,7 @@ class Car
     /**
      * Set price
      *
-     * @param string $price
+     * @param float $price
      *
      * @return Car
      */
@@ -215,7 +246,7 @@ class Car
     /**
      * Get price
      *
-     * @return string
+     * @return float
      */
     public function getPrice()
     {
@@ -257,6 +288,26 @@ class Car
         return $this;
     }
 
+    public function _toString()
+    {
+        return $this->getId();
+    }
+
+    /**
+     * @return Booking[]|ArrayCollection
+     */
+    public function getBooking()
+    {
+        return $this->booking;
+    }
+
+    /**
+     * @param Booking[]|ArrayCollection $booking
+     */
+    public function setBooking($booking): void
+    {
+        $this->booking[] = $booking;
+    }
 
 
 }

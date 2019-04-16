@@ -50,6 +50,9 @@
             <a href="{{ path('car_edit', { 'id': car.id }) }}">Edit</a>
         </li>
         <li>
+            <a href="{{ path('booking_new',{ 'car_id': car.id})}}">Book this car</a>
+        </li>
+        <li>
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}

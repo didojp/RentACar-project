@@ -2,20 +2,30 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Booking;
+use AppBundle\Entity\Car;
 use AppBundle\Entity\Deal;
+use AppBundle\Entity\Payment;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Deal controller.
  *
- * @Route("deal")
+ * @Route("deals")
  */
 class DealController extends Controller
 {
     /**
-     * Lists all deal entities.
+     * Lists all deals entities.
      *
      * @Route("/", name="deal_index")
      * @Method("GET")
@@ -32,33 +42,83 @@ class DealController extends Controller
     }
 
     /**
-     * Creates a new deal entity.
+     * Creates a new deals entity.
      *
-     * @Route("/new", name="deal_new")
+     * @Route("/new/{booking_id}", name="deal_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param $booking_id
+     * @return Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $booking_id)
     {
-        $deal = new Deal();
-        $form = $this->createForm('AppBundle\Form\DealType', $deal);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        /** @var User $bookerId */
+        $bookerId=$this->getUser()?:null;
+
+        if ($bookerId==null)
+        {
+            return $this->redirectToRoute('security_login');// да се довърши
+        }
+
+        $userId=$bookerId->getId();
+        $user= $this->getDoctrine()->getManager()
+                    ->getRepository(User::class)->find($userId);
+
+       $deal = new Deal();
+       $id=$booking_id;
+       $booking=$this->getDoctrine()->getManager()
+                     ->getRepository(Booking::class)
+                     ->findCarAndBooking($id);
+
+       $car=$booking->getCar();
+       $deal->setUser($user);
+       $deal->setCar($car);
+       $deal->setCarPrice($booking->getPrice());
+       $deal->setFromDate($booking->getFromDate());
+       $deal->setToDate($booking->getToDate());
+       $deal->setNumberOfDays($booking->getNumberOfDays());
+       $carPrice=$booking->getPrice();
+       $numberOfDays=$booking->getNumberOfDays();
+       $rentPrice=$carPrice*$numberOfDays;
+       $deal->setDealPrice($rentPrice);
+
+       //до тук работи!
+       $payment=$this->getDoctrine()->getManager()->getRepository(Payment::class)->findAll();
+       $paymentForm=$this->createFormBuilder($payment)
+           ->add('Payment', ChoiceType::class,array(
+               'choices'=>array(
+               'Will pay via PayPal'=>'via PayPal',
+               'Expect a phone call from us within next 24 hours'=>'phone call',
+                   ),
+               'expanded'=>true,
+           ))
+           ->add('save', SubmitType::class, ['label'=>'Confirm_payment'])
+           ->getForm();
+
+        $paymentForm->handleRequest($request);
+
+       //Here should set the payment logic;
+
+        if ($paymentForm->isSubmitted() && $paymentForm->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($deal);
             $em->flush();
+
 
             return $this->redirectToRoute('deal_show', array('id' => $deal->getId()));
         }
 
         return $this->render('deal/new.html.twig', array(
-            'deal' => $deal,
-            'form' => $form->createView(),
+            'deals' => $deal,
+            'paymentForm' => $paymentForm->createView(),
         ));
     }
 
     /**
-     * Finds and displays a deal entity.
+     * Finds and displays a deals entity.
      *
      * @Route("/{id}", name="deal_show")
      * @Method("GET")
@@ -68,16 +128,19 @@ class DealController extends Controller
         $deleteForm = $this->createDeleteForm($deal);
 
         return $this->render('deal/show.html.twig', array(
-            'deal' => $deal,
+            'deals' => $deal,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing deal entity.
+     * Displays a form to edit an existing deals entity.
      *
      * @Route("/{id}/edit", name="deal_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Deal $deal
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function editAction(Request $request, Deal $deal)
     {
@@ -92,14 +155,14 @@ class DealController extends Controller
         }
 
         return $this->render('deal/edit.html.twig', array(
-            'deal' => $deal,
+            'deals' => $deal,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a deal entity.
+     * Deletes a deals entity.
      *
      * @Route("/{id}", name="deal_delete")
      * @Method("DELETE")
@@ -119,9 +182,9 @@ class DealController extends Controller
     }
 
     /**
-     * Creates a form to delete a deal entity.
+     * Creates a form to delete a deals entity.
      *
-     * @param Deal $deal The deal entity
+     * @param Deal $deal The deals entity
      *
      * @return \Symfony\Component\Form\Form The form
      */

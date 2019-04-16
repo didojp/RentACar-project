@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,7 +30,7 @@ class Deal
     private $dealPrice;
 
     /**
-     * @var int
+     * @var \DateInterval
      *
      * @ORM\Column(name="numberOfDays", type="integer")
      */
@@ -56,13 +57,46 @@ class Deal
     private $car;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="deal")
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="deals")
      * @ORM\JoinColumn(name="user_id",referencedColumnName="id")
      */
     private $user;
 
     /**
+     * @var string
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Payment", inversedBy="deals")
+     * @ORM\JoinColumn(name="payment_id", referencedColumnName="id")
+     *
+     */
+    private $payment;
+
+    /**
+     * @ORM\Column(name="car_price", type="decimal", precision=10, scale=2)
+     */
+    private $carPrice;
+
+    /**
      * @return mixed
+     */
+    public function getCarPrice()
+    {
+        return $this->carPrice;
+    }
+
+    /**
+     * @param mixed $carPrice
+     */
+    public function setCarPrice($carPrice): void
+    {
+        $this->carPrice = $carPrice;
+    }
+
+
+
+
+    /**
+     * @return User
      */
     public function getUser()
     {
@@ -70,11 +104,13 @@ class Deal
     }
 
     /**
-     * @param mixed $user
+     * @param User $user
+     * @return Deal
      */
-    public function setUser($user): void
+    public function setUser(User $user= null) //: void
     {
         $this->user = $user;
+        return $this;
     }
 
 
@@ -106,33 +142,18 @@ class Deal
     }
 
     /**
-     * Set dealPrice
-     *
-     * @param string $dealPrice
-     *
-     * @return Deal
+     * @param int $id
      */
-    public function setDealPrice($dealPrice)
+    public function setId(int $id): void
     {
-        $this->dealPrice = $dealPrice;
-
-        return $this;
+        $this->id = $id;
     }
 
-    /**
-     * Get dealPrice
-     *
-     * @return string
-     */
-    public function getDealPrice()
-    {
-        return $this->dealPrice;
-    }
 
     /**
      * Set numberOfDays
      *
-     * @param integer $numberOfDays
+     * @param \DateInterval $numberOfDays
      *
      * @return Deal
      */
@@ -146,7 +167,7 @@ class Deal
     /**
      * Get numberOfDays
      *
-     * @return int
+     * @return \DateInterval
      */
     public function getNumberOfDays()
     {
@@ -200,5 +221,43 @@ class Deal
     {
         return $this->toDate;
     }
+
+    /**
+     * @return string
+     */
+    public function getPayment(): string
+    {
+        return $this->payment;
+    }
+
+    /**
+     * @param string $payment
+     */
+    public function setPayment(string $payment): void
+    {
+        $this->payment = $payment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDealPrice(): string
+    {
+        return $this->dealPrice;
+    }
+
+    /**
+     * @param string $dealPrice
+     */
+    public function setDealPrice(string $dealPrice): void
+    {
+        $this->dealPrice = $dealPrice;
+    }
+
+
+
+
+
+
 }
 

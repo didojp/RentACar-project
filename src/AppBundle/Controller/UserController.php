@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -44,11 +46,21 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password=$this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPassword());
+
+            $user->setPassword($password);
+            $roleRepository=$this->getDoctrine()->getRepository(Role::class);
+            $userRole=$roleRepository->findOneBy(['name'=>'ROLE_USER']);
+            $user->addRole($userRole);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('user_show', array('id' => $user->getId()));
+            return $this->redirectToRoute("security_login");
+
+           // return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 
         return $this->render('user/new.html.twig', array(
@@ -103,9 +115,13 @@ class UserController extends Controller
      *
      * @Route("/{id}", name="user_delete")
      * @Method("DELETE")
+     * @param Request $request
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, User $user)
     {
+
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 
@@ -123,7 +139,7 @@ class UserController extends Controller
      *
      * @param User $user The user entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
      */
     private function createDeleteForm(User $user)
     {
