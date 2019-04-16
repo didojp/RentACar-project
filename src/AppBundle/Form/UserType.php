@@ -29,7 +29,7 @@ class UserType extends AbstractType
                 'second_options'=>['label'=>'Repeat Password'],
             ])
             ->add('nationality', \Symfony\Component\Form\Extension\Core\Type\TextType::class)
-            ->add('address', \Symfony\Component\Form\Extension\Core\Type\TextType::class);
+            ->add('email', \Symfony\Component\Form\Extension\Core\Type\TextType::class);
     }/**
      * {@inheritdoc}
      */

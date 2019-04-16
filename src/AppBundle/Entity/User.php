@@ -61,9 +61,9 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="text", nullable=true)
+     * @ORM\Column(name="email", type="text", nullable=true)
      */
-    private $address;
+    private $email;
 
     /**
      * @var ArrayCollection|Deal[]
@@ -298,27 +298,27 @@ class User implements UserInterface
     }
 
     /**
-     * Set address
+     * Set email
      *
-     * @param string $address
+     * @param string $email
      *
      * @return User
      */
-    public function setAddress($address)
+    public function setEmail($email)
     {
-        $this->address = $address;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get address
+     * Get email
      *
      * @return string
      */
-    public function getAddress()
+    public function getEmail()
     {
-        return $this->address;
+        return $this->email;
     }
 
     /**
