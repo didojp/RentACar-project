@@ -31,15 +31,22 @@
                 <td>{{ car.seats }}</td>
                 <td>{{ car.price }}</td>
                 <td><a href="{{ path('car_show', {'id': car.id}) }}">
-                    <img src="{{ asset('uploads/images/'~ car.image) }}" width="350" height="200" > </a></td>
+                    <img src="{{ asset('uploads/images/'~ car.image) }}" width="350" height="200" > </a>
+                </td>
                 <td>
                     <ul>
                         <li>
                             <a href="{{ path('car_show', { 'id': car.id }) }}">show</a>
                         </li>
-                        <li>
-                            <a href="{{ path('car_edit', { 'id': car.id }) }}">edit</a>
-                        </li>
+
+                        {% if app.user != null %}
+                            {% if app.user.isAdmin or app.user.isModerator %}
+                              <li>
+                                  <a href="{{ path('car_edit', { 'id': car.id }) }}">edit</a>
+                              </li>
+                            {% endif %}
+                        {% endif %}
+
                     </ul>
                 </td>
             </tr>
@@ -48,8 +55,13 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('car_new') }}">Create a new car</a>
-        </li>
+        {% if app.user != null %}
+          {% if app.user.isAdmin or app.user.isModerator %}
+          <li>
+             <a href="{{ path('car_new') }}">Create a new car</a>
+          </li>
+          {% endif %}
+        {% endif %}
     </ul>
+
 {% endblock %}

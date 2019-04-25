@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -34,7 +35,7 @@ class CategoryController extends Controller
 
     /**
      * Creates a new category entity.
-     *
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/new", name="category_new")
      * @Method({"GET", "POST"})
      */
@@ -76,7 +77,7 @@ class CategoryController extends Controller
 
     /**
      * Displays a form to edit an existing category entity.
-     *
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="category_edit")
      * @Method({"GET", "POST"})
      */
@@ -101,7 +102,7 @@ class CategoryController extends Controller
 
     /**
      * Deletes a category entity.
-     *
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/{id}", name="category_delete")
      * @Method("DELETE")
      */

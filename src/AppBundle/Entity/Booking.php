@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Booking
@@ -34,19 +36,19 @@ class Booking
      */
     private $user;
 
-
-
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()     *
      * @ORM\Column(name="fromDate", type="datetime")
+     *
      */
     private $fromDate;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()     *
      * @ORM\Column(name="toDate", type="datetime")
+     *
      */
     private $toDate;
 
@@ -54,6 +56,7 @@ class Booking
      * @var \DateInterval
      *
      * @ORM\Column(name="numberOfDays", type="integer")
+     *
      */
     private $numberOfDays;
 
@@ -63,6 +66,25 @@ class Booking
      * @ORM\Column(name="price", type="float")
      */
     private $price;
+
+    /**
+     * @var \DateTime("now")
+     */
+    private $today;
+
+
+//    public function setToday():void
+//    {
+//        $this->today=new \DateTime("now");
+//        //$this->today= date('Y-m-d', 'H:i');
+////        return $this;
+//    }
+
+    public function today()
+    {
+
+        return $this->today=new \DateTime("now");
+    }
 
 
     /**
@@ -211,6 +233,10 @@ class Booking
         return $this->getPrice()*$this->getNumberOfDays();
 
     }
+
+
+
+
 
 
 }

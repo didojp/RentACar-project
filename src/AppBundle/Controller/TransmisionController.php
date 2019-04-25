@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Transmision;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +38,7 @@ class TransmisionController extends Controller
    
     /**`
      * Creates a new transmision entity.
-     *
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/new", name="transmision_new")
      * @Method({"GET", "POST"})
      */
@@ -63,7 +64,7 @@ class TransmisionController extends Controller
 
     /**
      * Finds and displays a transmision entity.
-     *
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/{id}", name="transmision_show")
      * @Method("GET")
      */
@@ -79,7 +80,7 @@ class TransmisionController extends Controller
 
     /**
      * Displays a form to edit an existing transmision entity.
-     *
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="transmision_edit")
      * @Method({"GET", "POST"})
      */
@@ -104,7 +105,7 @@ class TransmisionController extends Controller
 
     /**
      * Deletes a transmision entity.
-     *
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/{id}", name="transmision_delete")
      * @Method("DELETE")
      */

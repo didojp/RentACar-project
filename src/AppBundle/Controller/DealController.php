@@ -7,6 +7,7 @@ use AppBundle\Entity\Car;
 use AppBundle\Entity\Deal;
 use AppBundle\Entity\Payment;
 use AppBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,6 +28,7 @@ class DealController extends Controller
     /**
      * Lists all deals entities.
      *
+     * @Security("is_granted('ROLE_MODERATOR')")
      * @Route("/", name="deal_index")
      * @Method("GET")
      */
@@ -43,7 +45,7 @@ class DealController extends Controller
 
     /**
      * Creates a new deals entity.
-     *
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Route("/new/{booking_id}", name="deal_new")
      * @Method({"GET", "POST"})
      * @param Request $request
@@ -65,6 +67,8 @@ class DealController extends Controller
         $userId=$bookerId->getId();
         $user= $this->getDoctrine()->getManager()
                     ->getRepository(User::class)->find($userId);
+
+
 
        $deal = new Deal();
        $id=$booking_id;
@@ -119,7 +123,7 @@ class DealController extends Controller
 
     /**
      * Finds and displays a deals entity.
-     *
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Route("/{id}", name="deal_show")
      * @Method("GET")
      */
@@ -135,7 +139,7 @@ class DealController extends Controller
 
     /**
      * Displays a form to edit an existing deals entity.
-     *
+     * @Security("is_granted('ROLE_MODERATOR')")
      * @Route("/{id}/edit", name="deal_edit")
      * @Method({"GET", "POST"})
      * @param Request $request
@@ -163,7 +167,7 @@ class DealController extends Controller
 
     /**
      * Deletes a deals entity.
-     *
+     * @Security("is_granted('ROLE_MODERATOR')")
      * @Route("/{id}", name="deal_delete")
      * @Method("DELETE")
      */

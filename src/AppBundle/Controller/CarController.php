@@ -6,7 +6,9 @@ use AppBundle\Entity\Car;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Transmision;
 use AppBundle\Form\TransmisionType;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,6 +21,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Car controller.
@@ -48,7 +51,7 @@ class CarController extends Controller
 
     /**
      * Creates a new car entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new", name="car_new")
      * @Method({"GET", "POST"})
      * @param Request $request
@@ -111,7 +114,7 @@ class CarController extends Controller
 
     /**
      * Displays a form to edit an existing car entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="car_edit")
      * @Method({"GET", "POST"})
      */
@@ -173,7 +176,7 @@ class CarController extends Controller
 
     /**
      * Deletes a car entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="car_delete")
      * @Method("DELETE")
      * @param Request $request

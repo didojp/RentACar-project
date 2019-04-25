@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,7 @@ class UserType extends AbstractType
                 'second_options'=>['label'=>'Repeat Password'],
             ])
             ->add('nationality', \Symfony\Component\Form\Extension\Core\Type\TextType::class)
-            ->add('email', \Symfony\Component\Form\Extension\Core\Type\TextType::class);
+            ->add('email', EmailType::class);
     }/**
      * {@inheritdoc}
      */

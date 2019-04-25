@@ -26,16 +26,19 @@
                 <td>{{ deals.numberOfDays }}</td>
                 <td>{% if deals.fromDate %}{{ deals.fromDate|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if deals.toDate %}{{ deals.toDate|date('Y-m-d') }}{% endif %}</td>
+
                 <td>
                     <ul>
                         <li>
                             <a href="{{ path('deal_show', { 'id': deals.id }) }}">show</a>
                         </li>
+
                         <li>
                             <a href="{{ path('deal_edit', { 'id': deals.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
+
             </tr>
         {% endfor %}
         </tbody>

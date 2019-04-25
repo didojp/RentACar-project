@@ -7,14 +7,15 @@
 {% block login %}
 <form name="authenticate" action="{{ path('security_login') }}" method="post">
     <label for="userName">Username:</label>
-        <input type="text" id="userName" name="_username" >
-
+        <input type="text"  class="form-control" id="userName" name="_username" >
+    <br><br>
     <label for="password">Password:</label>
-        <input type="password" id="password" name="_password">
+        <input type="password" class="form-control" id="password" name="_password">
 
+    <br><br>
 
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
     <input type="hidden" name="_target_path" value="/car"/>
-    <input type="submit" value="login">
+    <button type="submit" class="btn btn-default">login</button>
 </form>
 {% endblock %}

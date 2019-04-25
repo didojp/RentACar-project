@@ -7,6 +7,7 @@ use AppBundle\Entity\Booking;
 use AppBundle\Entity\Car;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class BookingController extends Controller
 {
     /**
+     * @Security("is_granted('ROLE_MODERATOR')")
      * @Route("/booking",name="booking_index")
      * @Method("GET")
      * @param $name
@@ -21,6 +23,7 @@ class BookingController extends Controller
      */
     public function indexAction($name)
     {
+
         return $this->render('', array('name' => $name));
     }
 
@@ -33,6 +36,7 @@ class BookingController extends Controller
      * @param $car_id
      * @return Response
      *
+     * @throws \Exception
      */
     public function newBookingAction(Request $request, $car_id)
     {
@@ -60,10 +64,19 @@ class BookingController extends Controller
             $numberOfDays=date_diff($start,$final);
             $days=$numberOfDays->d;
             $booking->setNumberOfDays($days);
+            $today=$booking->today();
+            if ($start< $today||$final<$start)
+            {
+                return new Response('The chosen dates are not valid!');
+                //направи си флаш месидж с Java Script.
+            }
+
 
             $em->persist($car);
             $em->persist($booking);
             $em->flush();
+
+
 
             return $this->render('booking/bookedCar.html.twig',['booking'=>$booking]);
         }
@@ -137,6 +150,7 @@ class BookingController extends Controller
             ->setMethod('DELETE')
             ->getForm();
     }
+
 
 
 

@@ -31,13 +31,13 @@ class Role
 
     /**
      * @var ArrayCollection|User[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="role")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="roles")
      */
     private $users;
 
     public function __construct()
     {
-        $this->name= new ArrayCollection();
+        $this->users= new ArrayCollection();
     }
 
     /**
@@ -47,7 +47,6 @@ class Role
     {
         return $this->users;
     }
-
 
 
     /**
@@ -82,6 +81,11 @@ class Role
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getRole()
+    {
+        return $this->getName();
     }
 }
 

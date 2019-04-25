@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,7 @@ class UserController extends Controller
 {
     /**
      * Lists all user entities.
-     *
+     * @Security("is_granted('ROLE_MODERATOR')")
      * @Route("/", name="user_index")
      * @Method("GET")
      */
@@ -38,6 +39,8 @@ class UserController extends Controller
      *
      * @Route("/new", name="user_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -71,7 +74,7 @@ class UserController extends Controller
 
     /**
      * Finds and displays a user entity.
-     *
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Route("/{id}", name="user_show")
      * @Method("GET")
      */
@@ -87,7 +90,7 @@ class UserController extends Controller
 
     /**
      * Displays a form to edit an existing user entity.
-     *
+     * @Security("is_granted('ROLE_MODERATOR')")
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
      */
@@ -112,7 +115,7 @@ class UserController extends Controller
 
     /**
      * Deletes a user entity.
-     *
+     * @Security("is_granted('ROLE_MODERATOR')")
      * @Route("/{id}", name="user_delete")
      * @Method("DELETE")
      * @param Request $request

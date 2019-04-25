@@ -2,8 +2,6 @@
 
 {% block body %}
     <h1>Deal</h1>
-
-    {{ dump(app.request) }}
     <table>
         <tbody>
             <tr>
@@ -59,6 +57,10 @@
         </tbody>
     </table>
 
+
+{% if app.user != null %}
+          {% if app.user.isAdmin or app.user.isModerator %}
+
     <ul>
         <li>
             <a href="{{ path('deal_index') }}">Back to the list</a>
@@ -72,6 +74,9 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+          {% endif %}
+{% endif %}
+
 
     {#<footer>#}
         {#<div class="pull-right">#}

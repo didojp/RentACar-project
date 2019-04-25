@@ -3,8 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -27,6 +29,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="userName", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $userName;
 
@@ -34,6 +37,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $firstName;
 
@@ -41,6 +45,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $lastName;
 
@@ -61,7 +66,11 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="text", nullable=true)
+     * @ORM\Column(name="email", type="text", nullable=false)
+     * @Assert\Email(
+     *     message= "The email '{{ value }}' is not a valid email.",
+     *     checkMX= true
+     *     )
      */
     private $email;
 
@@ -77,15 +86,19 @@ class User implements UserInterface
     private $books;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Role", inversedBy="users")
-     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role", inversedBy="users")
+     * @ORM\JoinTable(name= "users_roles")
+     *
      */
-    private $role;
+    private $roles;
+
 
     public function __construct()
     {
         $this->deals=new ArrayCollection();
         $this->books=new  ArrayCollection();
+        $this->roles= new ArrayCollection();
     }
 
     /**
@@ -102,9 +115,16 @@ class User implements UserInterface
      *
      * @return (Role|string)[] The user roles
      */
+
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        $stringRoles= [];
+        foreach ($this->roles as $role)
+        {
+            /** @var $role Role */
+            $stringRoles[]= $role->getRole();
+        }
+        return $stringRoles;
     }
 
     /**
@@ -148,13 +168,13 @@ class User implements UserInterface
         $this->deals[] = $deal;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getRole()
+//    {
+//        return $this->role;
+//    }
 
     /**
      * @param mixed $role
@@ -346,6 +366,19 @@ class User implements UserInterface
     public function setBooks($books): void
     {
         $this->books = $books;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return in_array("ROLE_ADMIN", $this->getRoles());
+    }
+
+    public function isModerator()
+    {
+        return in_array("ROLE_MODERATOR", $this->getRoles());
     }
 
 
