@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -36,18 +36,44 @@ class CarController extends Controller
      * @Route("/", name="car_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
 
         $cars = $em->getRepository('AppBundle:Car')->findAll();
 
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $cars, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
+
 
         return $this->render('car/index.html.twig', array(
-            'cars' => $cars,
+            'pagination' => $pagination,
         ));
     }
+
+    /**
+     * @Route("/select", name="car_select")
+     * @Method("GET")
+     *
+     */
+    public function selectAction()
+    {
+
+        $cars=$this->getDoctrine()->getManager()->getRepository(Car::class)->findByTransmision();
+
+//        dump($cars);
+//        exit;
+
+        return $this->render('car/selected.html.twig', array('car'=>$cars,));
+
+    }
+
+
 
     /**
      * Creates a new car entity.
@@ -223,6 +249,10 @@ class CarController extends Controller
     {
         return md5(uniqid( ));
     }
+
+
+
+
 
 
 }

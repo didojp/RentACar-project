@@ -1,10 +1,8 @@
 
- {#{% extends 'user/header.html.twig' %}#}
-{% extends 'base.html.twig' %}
 
 {% block choiceTr %}
 
-     {{ form(myform)}}
-
-    {% block body%}{% endblock %}
+    {{ form_start(myform) }}
+    {{ form_row(myform) }}
+    {{ form_end(myform) }}
 {% endblock %}

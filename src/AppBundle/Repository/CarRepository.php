@@ -3,6 +3,8 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Car;
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Transmision;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -15,6 +17,37 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class CarRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByTransmision()
+    {
+        $entityManager=$this->getEntityManager();
+
+        $dql= 'SELECT c, t FROM AppBundle:Car c JOIN c.transmision t';
+        $query = $entityManager->createQuery($dql);
+
+
+
+        return $query->getResult();
+
+    }
+
+    /**
+     * Query to DTO defining search by transmision and category
+     * @param Transmision $transmision
+     * @param Category $category
+     * @return array
+     *
+     */
+    public function findByCategory(Transmision $transmision, Category $category)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.transmision= :transmision')
+            ->andWhere('c.category=:category')
+            ->setParameters(array('transmision'=>$transmision, 'category'=>$category))
+            ->addOrderBy('c.make', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 
 

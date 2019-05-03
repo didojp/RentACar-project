@@ -2,6 +2,10 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Booking;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
 use Doctrine\ORM\NonUniqueResultException;
 
 /**
@@ -12,6 +16,12 @@ use Doctrine\ORM\NonUniqueResultException;
  */
 class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function __construct(EntityManager $em)
+    {
+        parent::__construct( $em, new Mapping\ClassMetadata(Booking::class));
+    }
+
     public function findCarAndBooking($id)
     {
         $query=$this->getEntityManager()->createQuery('SELECT b, c FROM AppBundle:Booking b
