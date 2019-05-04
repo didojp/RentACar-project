@@ -36,8 +36,13 @@
                 <td>
                     <ul>
                         <li>
+                            <a href="{{ path('booking_new',{ 'car_id': car.id}) }}">Book this car</a>
+                        </li>
+
+                        <li>
                             <a href="{{ path('car_show', { 'id': car.id }) }}">show</a>
                         </li>
+
 
                         {% if app.user != null %}
                             {% if app.user.isAdmin or app.user.isModerator %}

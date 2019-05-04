@@ -8,6 +8,7 @@ use AppBundle\Entity\Transmision;
 use AppBundle\Repository\SelectRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,6 +44,7 @@ class SelectController extends Controller
         $transmision = $em->getRepository('AppBundle:Transmision')->findAll();
         $category= $em->getRepository('AppBundle:Category')->findAll();
 
+
         $transmisionForm= $this->createFormBuilder()
                               ->add("transmision", EntityType::class,
                                               ['class'=>Transmision::class,
@@ -59,19 +61,28 @@ class SelectController extends Controller
 
         if ($transmisionForm->isSubmitted())
         {
-            /** @var Transmision $choices */
-            $choices=$transmisionForm->getData();
 
-            $transmisionChoice=array_splice($choices, 0, 1);
-            $categoryChoice= array_splice($choices, 0, 2);
-            $transmision= (object)$transmisionChoice;
-            $category=(object)$categoryChoice;
+            $transmision=$transmisionForm->get('transmision')->getData()->getId();
+            $category=$transmisionForm->get('category')->getData()->getId();
 
-           $selectedCars=$this->getDoctrine()->getManager()
-                              ->getRepository(Car::class)
-                              ->findByCategory($transmision, $category);
-           dump($selectedCars);
-           exit;
+
+
+            $selectedCars=$this->getDoctrine()->getManager()
+                               ->getRepository(Car::class)
+                               ->findByCategory($transmision, $category);
+
+            $cars=array();
+
+            foreach ($selectedCars as $id)
+            {
+                $car=$em->getRepository('AppBundle:Car')->find($id);
+               array_push($cars,$car);
+            }
+
+            return $this->render('car/selected.html.twig', array('cars'=>$cars));
+
+
+
         }
 
 
@@ -83,6 +94,8 @@ class SelectController extends Controller
            );
 
     }
+
+
 
 
 }

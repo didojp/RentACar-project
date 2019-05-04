@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Car</h1>
+    {% block selectBar %}{% endblock %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Id:</th>
+                <td>{{ car.id }}</td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td><img src="{{ asset('uploads/images/' ~ car.image) }}" width="350" height="200"></td>
+            </tr>
+            <tr>
+                <th>Make:</th>
+                <td>{{ car.make }}</td>
+            </tr>
+            <tr>
+                <th>Model:</th>
+                <td>{{ car.model }}</td>
+            </tr>
+            <tr>
+                <th>Transmision:</th>
+                <td>{{ car.transmision }}</td>
+            </tr>
+            <tr>
+                <th>Category:</th>
+                <td>{{ car.category }}</td>
+            </tr>
+            <tr>
+                <th>Seats:</th>
+                <td>{{ car.seats }}</td>
+            </tr>
+            <tr>
+                <th>Price BGN:</th>
+                <td>{{ car.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('car_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('booking_new',{ 'car_id': car.id})}}">Book this car</a>
+        </li>
+        {% if app.user != null %}
+         {% if app.user.isAdmin or app.user.isModerator %}
+           <li>
+                <a href="{{ path('car_edit', { 'id': car.id }) }}">Edit</a>
+           </li>
+           <li>
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+         {% endif %}
+        {% endif %}
+
+
+    </ul>
+{% endblock %}

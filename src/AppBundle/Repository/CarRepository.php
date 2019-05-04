@@ -32,20 +32,28 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
 
     /**
      * Query to DTO defining search by transmision and category
-     * @param Transmision $transmision
-     * @param Category $category
+     * @param $transmision
+     * @param $category
      * @return array
      *
      */
-    public function findByCategory(Transmision $transmision, Category $category)
+    public function findByCategory($transmision, $category)
     {
-        return $this->createQueryBuilder('c')
-            ->where('c.transmision= :transmision')
-            ->andWhere('c.category=:category')
-            ->setParameters(array('transmision'=>$transmision, 'category'=>$category))
-            ->addOrderBy('c.make', 'DESC')
-            ->getQuery()
-            ->getResult();
+        $db=$this->getEntityManager()->getConnection();
+        $qb=$db->createQueryBuilder();
+        $qb->select('c.id')
+            ->from('cars', 'c')
+            ->where('c.transmision_id=?')
+            ->andWhere('c.category_id=?')
+            ->setParameter(0,$transmision)
+            ->setParameter(1,$category)
+            ->orderBy('id','ASC')
+            ;
+        $result=$qb->execute();
+       return $result->fetchAll();
+
+
+
     }
 
 
