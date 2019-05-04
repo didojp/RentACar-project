@@ -65,11 +65,18 @@ class SelectController extends Controller
             $transmision=$transmisionForm->get('transmision')->getData()->getId();
             $category=$transmisionForm->get('category')->getData()->getId();
 
-
-
-            $selectedCars=$this->getDoctrine()->getManager()
-                               ->getRepository(Car::class)
-                               ->findByCategory($transmision, $category);
+            if ($transmision==3)
+            {
+                $selectedCars=$this->getDoctrine()->getManager()
+                                ->getRepository(Car::class)
+                                ->findByCategory($category);
+            }
+            else
+            {
+                $selectedCars=$this->getDoctrine()->getManager()
+                    ->getRepository(Car::class)
+                    ->findByAll($transmision, $category);
+            }
 
             $cars=array();
 

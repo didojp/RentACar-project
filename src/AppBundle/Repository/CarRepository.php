@@ -17,18 +17,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class CarRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findByTransmision()
-    {
-        $entityManager=$this->getEntityManager();
-
-        $dql= 'SELECT c, t FROM AppBundle:Car c JOIN c.transmision t';
-        $query = $entityManager->createQuery($dql);
-
-
-
-        return $query->getResult();
-
-    }
 
     /**
      * Query to DTO defining search by transmision and category
@@ -37,7 +25,7 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
      * @return array
      *
      */
-    public function findByCategory($transmision, $category)
+    public function findByAll($transmision, $category)
     {
         $db=$this->getEntityManager()->getConnection();
         $qb=$db->createQueryBuilder();
@@ -52,10 +40,22 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
         $result=$qb->execute();
        return $result->fetchAll();
 
-
-
     }
 
+    public function findByCategory($category)
+    {
+        $db=$this->getEntityManager()->getConnection();
+        $qb=$db->createQueryBuilder();
+        $qb->select('c.id')
+            ->from('cars','c')
+            ->where('c.category_id=?')
+            ->setParameter(0, $category)
+            ->orderBy('id', 'ASC');
+
+        $result=$qb->execute();
+        return $result->fetchAll();
+
+    }
 
 
 
