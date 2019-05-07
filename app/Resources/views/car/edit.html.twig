@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="container body-content span=8 offset=2"> {# за да възприеме файлът на снимката#}
         <div class="well">
             <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('car_edit', {id: car.id}) }}" method="post">
@@ -13,7 +18,7 @@
                     {{ form_row(edit_form.transmision) }}
                     {{ form_row(edit_form.category) }}
                     {{ form_row(edit_form.seats) }}
-                    {{ form_row(edit_form.image) }}
+                    {{ form_row(edit_form.image )}}
                     {{ form_widget(edit_form) }}
                     <input type="submit" value="Edit" />
                     {{ form_end(edit_form) }}
@@ -26,9 +31,8 @@
             <a href="{{ path('car_index') }}">Back to the list</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('car_delete', {'id': car.id}) }}">Delete</a>
         </li>
     </ul>
 {% endblock %}
+

@@ -5,9 +5,14 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Car;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Transmision;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+
+
 
 /**
  * CarRepository
@@ -17,6 +22,64 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class CarRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * CarRepository constructor.
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new ClassMetadata(Car::class));
+    }
+
+    public function save(Car $car)
+    {
+        try
+        {
+            $this->_em->persist($car);
+            $this->_em->flush();
+
+            return true;
+        }
+        catch (\Exception $exception)
+        {
+            return false;
+        }
+    }
+    public function update(Car $car)
+    {
+        try{
+            $this->_em->merge($car);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $exception){
+
+            return false;
+        }
+    }
+
+    public function delete(Car $id)
+    {
+        try{
+            $this->_em->remove($id);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $exception){
+
+            return false;
+        }
+    }
+
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return parent::find($id, $lockMode, $lockVersion);
+    }
+
+    public function findAll()
+    {
+        return parent::findAll();
+    }
 
     /**
      * Query to DTO defining search by transmision and category
@@ -36,9 +99,9 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter(0,$transmision)
             ->setParameter(1,$category)
             ->orderBy('id','ASC')
-            ;
+        ;
         $result=$qb->execute();
-       return $result->fetchAll();
+        return $result->fetchAll();
 
     }
 
@@ -60,3 +123,4 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
 
 
 }
+

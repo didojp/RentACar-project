@@ -53,9 +53,14 @@ class UserController extends Controller
                 ->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
+            //to role service
+//            $role = $this->roleService->findOneByName('ROLE_USER');
             $roleRepository=$this->getDoctrine()->getRepository(Role::class);
             $userRole=$roleRepository->findOneBy(['name'=>'ROLE_USER']);
             $user->addRole($userRole);
+
+//            КЪМ МЕТОД SAVE
+//            $this->userService->save($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
