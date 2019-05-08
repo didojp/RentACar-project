@@ -99,9 +99,11 @@ class CarController extends Controller
             }
             $car->setImage($fileName);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($car);
-            $em->flush();
+            $this->carService->save($car);
+
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($car);
+//            $em->flush();
 
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }

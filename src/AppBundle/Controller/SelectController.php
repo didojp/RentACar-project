@@ -6,6 +6,9 @@ use AppBundle\Entity\Car;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Transmision;
 use AppBundle\Repository\SelectRepository;
+use AppBundle\Service\CarService;
+use AppBundle\Service\CategoryService;
+use AppBundle\Service\TransmisionService;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -16,17 +19,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SelectController extends Controller
 {
+    private $carService;
+    private $transmisionService;
+    private $categoryService;
+
     /**
-     * @param $name
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @param \Symfony\Component\HttpFoundation\Request
-     * @Route("/select", name="index_action")
+     * SelectController constructor.
+     * @param $carService
+     * @param $transmisionService
+     * @param $categoryService
      */
-    public function indexAction()
+    public function __construct(CarService $carService,
+                                TransmisionService $transmisionService,
+                                CategoryService $categoryService)
     {
-
-
-        return new Response('palamud');
+        $this->carService = $carService;
+        $this->transmisionService = $transmisionService;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -39,10 +48,12 @@ class SelectController extends Controller
     public function selectAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getManager();
+        $transmision=$this->transmisionService->findAll();
+        $category=$this->categoryService->findAll();
 
-        $transmision = $em->getRepository('AppBundle:Transmision')->findAll();
-        $category= $em->getRepository('AppBundle:Category')->findAll();
+//        $em = $this->getDoctrine()->getManager();
+//        $transmision = $em->getRepository('AppBundle:Transmision')->findAll();
+//        $category= $em->getRepository('AppBundle:Category')->findAll();
 
 
         $transmisionForm= $this->createFormBuilder()
@@ -55,43 +66,47 @@ class SelectController extends Controller
                               ->add("save", SubmitType::class)
                               ->getForm();
 
-
-
        $transmisionForm->handleRequest($request);
 
         if ($transmisionForm->isSubmitted())
         {
-
             $transmision=$transmisionForm->get('transmision')->getData()->getId();
             $category=$transmisionForm->get('category')->getData()->getId();
 
             if ($transmision==3)
             {
-                $selectedCars=$this->getDoctrine()->getManager()
-                                ->getRepository(Car::class)
-                                ->findByCategory($category);
+                $selectedCars=$this->carService->findByCategory($category);
             }
             else
             {
-                $selectedCars=$this->getDoctrine()->getManager()
-                    ->getRepository(Car::class)
-                    ->findByAll($transmision, $category);
+                $selectedCars=$this->carService->findByAll($transmision, $category);
             }
 
             $cars=array();
 
-            foreach ($selectedCars as $id)
+            foreach ($selectedCars as $key=>$value)
             {
-                $car=$em->getRepository('AppBundle:Car')->find($id);
-               array_push($cars,$car);
+                foreach ($value as $key1=>$value1){
+                    $id=$value1;
+                    $car=$this->carService->find($id);
+                    array_push($cars,$car);
+                }
+            }
+            if ($cars==null)
+            {
+                $this->addFlash('notice', 'We are sorry, but we do not have such a car.
+                                                            Please check for another one');
+                return $this->render('transmision/select.html.twig',
+                    array('transmisions'=>$transmision,
+                        'category'=>$category,
+                        'myform'=>$transmisionForm->createView()
+                    )
+                );
             }
 
             return $this->render('car/selected.html.twig', array('cars'=>$cars));
 
-
-
         }
-
 
        return $this->render('transmision/select.html.twig',
            array('transmisions'=>$transmision,

@@ -20,8 +20,8 @@ interface CarServiceInterface
     public function delete(Car $car):bool ;
     public function find(int $id);
     public function findAll();
-    public function findByAll(Transmision $transmision, Category $category);
-    public function findByCategory(Category $category);
+    public function findByAll(int $transmision, int $category);
+    public function findByCategory(int $category);
 
 }
 

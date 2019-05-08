@@ -2,6 +2,10 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Category;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
+
 /**
  * CategoryRepository
  *
@@ -10,4 +14,62 @@ namespace AppBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new Mapping\ClassMetadata(Category::class));
+    }
+
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return parent::find($id, $lockMode, $lockVersion);
+    }
+
+    public function findAll()
+    {
+        return parent::findAll();
+    }
+
+    public function save(Category $category)
+    {
+        try
+        {
+            $this->_em->persist($category);
+            $this->_em->flush();
+
+            return true;
+        }
+        catch (\Exception $exception)
+        {
+            return false;
+        }
+    }
+    public function update(Category $category)
+    {
+        try{
+            $this->_em->merge($category);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $exception){
+
+            return false;
+        }
+    }
+
+    public function delete(Category $id)
+    {
+        try{
+            $this->_em->remove($id);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $exception){
+
+            return false;
+        }
+    }
+
+
+
+
 }

@@ -62,12 +62,12 @@ class CarService implements CarServiceInterface
         return $this->carRepository->findAll();
     }
 
-    public function findByAll(Transmision $transmision, Category $category)
+    public function findByAll(int $transmision, int $category)
     {
         return $this->carRepository->findByAll($transmision, $category);
     }
 
-    public function findByCategory(Category $category)
+    public function findByCategory(int $category)
     {
         return $this->findByCategory($category);
     }

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Transmision;
+use AppBundle\Service\TransmisionService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -18,6 +19,18 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class TransmisionController extends Controller
 {
+    private $transmisionService;
+
+    /**
+     * TransmisionController constructor.
+     * @param $transmisionService
+     */
+    public function __construct(TransmisionService $transmisionService)
+    {
+        $this->transmisionService = $transmisionService;
+    }
+
+
     /**
      * Lists all transmision entities.
      *
@@ -26,9 +39,7 @@ class TransmisionController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $transmisions = $em->getRepository('AppBundle:Transmision')->findAll();
+        $transmisions= $this->transmisionService->findAll();
 
         return $this->render('transmision/index.html.twig', array(
             'transmisions' => $transmisions,
@@ -49,9 +60,8 @@ class TransmisionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($transmision);
-            $em->flush();
+
+            $this->transmisionService->save($transmision);
 
             return $this->redirectToRoute('transmision_show', array('id' => $transmision->getId()));
         }
@@ -67,14 +77,16 @@ class TransmisionController extends Controller
      * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/{id}", name="transmision_show")
      * @Method("GET")
+     * @param $id
+     *
+     * @return Response
      */
-    public function showAction(Transmision $transmision)
+    public function showAction($id)
     {
-        $deleteForm = $this->createDeleteForm($transmision);
+        $transmision=$this->transmisionService->find($id);
 
         return $this->render('transmision/show.html.twig', array(
             'transmision' => $transmision,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -86,12 +98,13 @@ class TransmisionController extends Controller
      */
     public function editAction(Request $request, Transmision $transmision)
     {
-        $deleteForm = $this->createDeleteForm($transmision);
+
         $editForm = $this->createForm('AppBundle\Form\TransmisionType', $transmision);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            $this->transmisionService->update($transmision);
 
             return $this->redirectToRoute('transmision_edit', array('id' => $transmision->getId()));
         }
@@ -99,45 +112,24 @@ class TransmisionController extends Controller
         return $this->render('transmision/edit.html.twig', array(
             'transmision' => $transmision,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Deletes a transmision entity.
      * @Security("is_granted('ROLE_ADMIN')")
-     * @Route("/{id}", name="transmision_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="transmision_delete")
+     *
      */
-    public function deleteAction(Request $request, Transmision $transmision)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($transmision);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($transmision);
-            $em->flush();
-        }
+        $transmision= $this->transmisionService->find($id);
+        $this->transmisionService->delete($transmision);
 
         return $this->redirectToRoute('transmision_index');
     }
 
-    /**
-     * Creates a form to delete a transmision entity.
-     *
-     * @param Transmision $transmision The transmision entity
-     *
-     * @return \Symfony\Component\Form\FormInterface The form
-     */
-    private function createDeleteForm(Transmision $transmision)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('transmision_delete', array('id' => $transmision->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
 
 
 

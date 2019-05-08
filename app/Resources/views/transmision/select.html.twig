@@ -1,7 +1,11 @@
 
 
 {% block choiceTr %}
-
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
     {{ form_start(myform) }}
     {{ form_row(myform) }}
     {{ form_end(myform) }}
