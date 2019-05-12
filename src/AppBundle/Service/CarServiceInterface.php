@@ -15,13 +15,14 @@ use AppBundle\Entity\Transmision;
 
 interface CarServiceInterface
 {
-    public function save(Car $car):bool ;
+    public function save(Car $car);
     public function update(Car $car):bool ;
     public function delete(Car $car):bool ;
     public function find(int $id);
     public function findAll();
     public function findByAll(int $transmision, int $category);
     public function findByCategory(int $category);
+    public function lastInsertedId():int;
 
 }
 

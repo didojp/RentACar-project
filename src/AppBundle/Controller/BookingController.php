@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Booking;
 use AppBundle\Entity\Car;
+use AppBundle\Service\BookingService;
+use AppBundle\Service\CarService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -14,19 +16,50 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookingController extends Controller
 {
+
+    private $bookingService;
+    private $carService;
+
+    /**
+     * BookingController constructor.
+     * @param BookingService $bookingService
+     * @param CarService $carService
+     */
+    public function __construct(BookingService $bookingService,CarService $carService)
+    {
+        $this->bookingService = $bookingService;
+        $this->carService= $carService;
+    }
+
     /**
      * @Security("is_granted('ROLE_MODERATOR')")
      * @Route("/booking",name="booking_index")
      * @Method("GET")
-     * @param $name
      * @return Response
      */
-    public function indexAction($name)
+    public function indexAction()
     {
+        $bookings= $this->bookingService->findAll();
 
-        return $this->render('', array('name' => $name));
+        return $this->render('booking/indexBooking.html.twig', array('bookings' => $bookings));
     }
 
+    /**
+     * @Route("/booking/delete", name="booking_deleteall")
+     * @Method("POST")
+     * @param Request $request
+     * @return Response
+     */
+    public function deleteAllAction(Request $request)
+    {
+        $this->bookingService->deleteAll();
+        $bookings=$this->bookingService->findAll();
+
+        if ($bookings==null){
+            $this->addFlash('notice', 'The whole booking list was successfully deleted');
+        }
+        return $this->render('booking/indexBooking.html.twig', array('bookings' => $bookings));
+    }
 
     /**
      *
@@ -45,7 +78,7 @@ class BookingController extends Controller
         /** @var Car $car */
         $id=$car_id;
 
-        $car= $this->getDoctrine()->getRepository(Car::class)->find($id);
+        $car=$this->carService->find($id);
 
         $booking->setCar($car);
         $booking->setPrice($car->getPrice());
@@ -56,27 +89,23 @@ class BookingController extends Controller
 
         if ($bookingForm->isValid()&&$bookingForm->isSubmitted())
         {
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($booking);
-//            $em->flush();
+            //calculate number of days based over fromDate and toDate
             $start=$booking->getFromDate();
             $final=$booking->getToDate();
             $numberOfDays=date_diff($start,$final);
             $days=$numberOfDays->d;
             $booking->setNumberOfDays($days);
             $today=$booking->today();
-            if ($start< $today||$final<$start)
+            if ($start< $today||$final<$start) //check does choosen dates are valid
             {
-                return new Response('The chosen dates are not valid!');
-                //направи си флаш месидж с Java Script.
+                $this->addFlash('notice','The chosen dates are not valid!');
+                return $this->render('booking/carBooking.html.twig', array(
+                    'booking'=>$booking,
+                    'bookingForm' => $bookingForm->createView(),
+                ));
             }
 
-
-            $em->persist($car);
-            $em->persist($booking);
-            $em->flush();
-
-
+            $this->bookingService->save($booking);
 
             return $this->render('booking/bookedCar.html.twig',['booking'=>$booking]);
         }
@@ -88,69 +117,6 @@ class BookingController extends Controller
 
 
     }
-
-//    /**
-//     * @Route("/booking/{id}", name="booking_show")
-//     * @param $id
-//     * @Method("GET")
-//     * @return Response
-//     */
-//
-//    public function bookingShowAction(Booking $booking)
-//    {
-//
-//        $deleteForm = $this->createDeleteForm($booking);
-//
-//
-//
-//        return $this->render('booking/bookedCar.html.twig', array(
-//            'booking' => $booking,
-//            'deleteForm'=>$deleteForm->createView(),
-//        ));
-//
-//    }
-
-//    /**
-//     * Deletes a booking entity.
-//     *
-//     * @Route("/{id}", name="booking_delete")
-//     * @Method("DELETE")
-//     * @param Request $request
-//     * @param Booking $booking
-//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-//     */
-//    public function deleteAction(Request $request, Booking $booking)
-//    {
-//        $form = $this->createDeleteForm($booking);
-//
-//        $form->handleRequest($request);
-//
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//
-//            $em = $this->getDoctrine()->getManager();
-//            $em->remove($booking);
-//            $em->flush();
-//        }
-//
-//        return $this->redirectToRoute('car_index');
-//    }
-
-    /**
-     * Creates a form to delete a booking entity.
-     *
-     * @param Booking $booking The booking entity
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    private function createDeleteForm(Booking $booking)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('booking_delete', array('id' => $booking->getId())))
-            ->setMethod('DELETE')
-            ->getForm();
-    }
-
 
 
 

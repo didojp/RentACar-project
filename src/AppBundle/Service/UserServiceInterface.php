@@ -9,7 +9,14 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Entity\User;
+
 interface UserServiceInterface
 {
+    public function find(int $id):?User;
+    public function findAll():array;
+    public function save(User $user):bool;
+    public function update(User $user):bool;
+    public function delete(User $user):bool;
 
 }

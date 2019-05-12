@@ -2,6 +2,11 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Deal;
+use AppBundle\Entity\Payment;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
+
 /**
  * PaymentRepository
  *
@@ -10,4 +15,51 @@ namespace AppBundle\Repository;
  */
 class PaymentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new Mapping\ClassMetadata(Payment::class));
+    }
+    public function findAll()
+    {
+        return parent::findAll();
+    }
+
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return parent::find($id, $lockMode, $lockVersion);
+    }
+
+    public function save(Payment $payment)
+    {
+        try{
+            $this->_em->persist($payment);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $exception){
+            return false;
+        }
+    }
+    public function update(Payment $payment)
+    {
+        try{
+            $this->_em->merge($payment);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $exception){
+
+            return false;
+        }
+    }
+    public function delete(Payment $id)
+    {
+        try{
+            $this->_em->remove($id);
+            $this->_em->flush();
+            return true;
+        }catch (\Exception $exception){
+            return false;
+        }
+    }
 }

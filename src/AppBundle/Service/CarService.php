@@ -28,7 +28,7 @@ class CarService implements CarServiceInterface
     }
 
 
-    public function save(Car $car):bool
+    public function save(Car $car)
     {
         return $this->carRepository->save($car);
     }
@@ -70,6 +70,11 @@ class CarService implements CarServiceInterface
     public function findByCategory(int $category)
     {
         return $this->findByCategory($category);
+    }
+
+    public function lastInsertedId(): int
+    {
+        return $this->carRepository->lastInsertedId();
     }
 
 

@@ -38,12 +38,13 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
             $this->_em->persist($car);
             $this->_em->flush();
 
-            return true;
+            return $car->getId();
         }
         catch (\Exception $exception)
         {
             return false;
         }
+
     }
     public function update(Car $car)
     {
@@ -119,7 +120,15 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
         return $result->fetchAll();
 
     }
+    public function lastInsertedId()
+    {
 
+        $connection=$this->getEntityManager()->getConnection();
+        return $connection->lastInsertId();
+
+
+
+    }
 
 
 }

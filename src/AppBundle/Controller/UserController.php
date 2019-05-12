@@ -5,6 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use AppBundle\Service\RoleService;
+use AppBundle\Service\UserService;
+use AppBundle\Service\UserServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -17,6 +20,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class UserController extends Controller
 {
+    private $userService;
+    private $roleService;
+
+    /**
+     * UserController constructor.
+     * @param $userService
+     */
+    public function __construct(UserService $userService,RoleService $roleService)
+    {
+        $this->userService = $userService;
+        $this->roleService=$roleService;
+    }
+
+
     /**
      * Lists all user entities.
      * @Security("is_granted('ROLE_MODERATOR')")
@@ -25,9 +42,7 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('AppBundle:User')->findAll();
+        $users= $this->userService->findAll();
 
         return $this->render('user/index.html.twig', array(
             'users' => $users,
@@ -53,22 +68,13 @@ class UserController extends Controller
                 ->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
-            //to role service
-//            $role = $this->roleService->findOneByName('ROLE_USER');
-            $roleRepository=$this->getDoctrine()->getRepository(Role::class);
-            $userRole=$roleRepository->findOneBy(['name'=>'ROLE_USER']);
+            $userRole=$this->roleService->findOneBy('ROLE_USER');
             $user->addRole($userRole);
 
-//            КЪМ МЕТОД SAVE
-//            $this->userService->save($user);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $this->userService->save($user);
 
             return $this->redirectToRoute("security_login");
-
-           // return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 
         return $this->render('user/new.html.twig', array(
@@ -85,11 +91,10 @@ class UserController extends Controller
      */
     public function showAction(User $user)
     {
-        $deleteForm = $this->createDeleteForm($user);
+        $user=$this->userService->findAll();
 
         return $this->render('user/show.html.twig', array(
             'user' => $user,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -106,7 +111,17 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            $password=$this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPassword());
+
+            $user->setPassword($password);
+
+            $userRole=$this->roleService->findOneBy('ROLE_USER');
+
+            $user->addRole($userRole);
+
+            $this->userService->update($user);
 
             return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
         }
@@ -134,9 +149,8 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
+
+            $this->userService->delete($user);
         }
 
         return $this->redirectToRoute('user_index');

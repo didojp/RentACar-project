@@ -20,14 +20,5 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * @Route"/proba", name="proba_page"
-     */
-    public function probaAction()
-    {
-        $em= $this->getDoctrine()->getRepository(Car::class);
-        $result=$em->transmisionSelect();
-
-    }
 
 }

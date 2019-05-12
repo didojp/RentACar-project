@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * BookingRepository
@@ -17,24 +18,75 @@ use Doctrine\ORM\NonUniqueResultException;
 class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         parent::__construct( $em, new Mapping\ClassMetadata(Booking::class));
     }
 
+    public function findAll()
+    {
+        return parent::findAll();
+    }
+
     public function findCarAndBooking($id)
     {
-        $query=$this->getEntityManager()->createQuery('SELECT b, c FROM AppBundle:Booking b
+
+        $query=$this->getEntityManager()
+            ->createQuery('SELECT b, c FROM AppBundle:Booking b
                                                             JOIN b.car c
                                                             WHERE b.id=:id'
         )->setParameter('id',$id);
+
+        return $query->getResult();
+
+//        try
+//        {
+//            return $query->getOneOrNullResult();
+//        }
+//        catch (NonUniqueResultException $e)
+//        {
+//            return new Response('No such booking finded');
+//        }
+    }
+    public function save(Booking $booking)
+    {
         try
         {
-            return $query->getOneOrNullResult();
+            $this->_em->persist($booking);
+            $this->_em->flush();
+
+            return true;
         }
-        catch (NonUniqueResultException $e)
+        catch (\Exception $exception)
         {
-            echo 'No such booking finded';
+            return false;
         }
     }
+    public function delete(Booking $id)
+    {
+        try{
+            $this->_em->remove($id);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $exception){
+
+            return false;
+        }
+    }
+    public function deleteAll(){
+
+        $booking= $this->findAll();
+        try{
+            foreach ($booking as $item) {
+                $this->_em->remove($item);
+                $this->_em->flush();
+            }
+            return true;
+        }catch (\Exception $exception){
+            return false;
+        }
+    }
+
+
 }

@@ -7,6 +7,10 @@ use AppBundle\Entity\Car;
 use AppBundle\Entity\Deal;
 use AppBundle\Entity\Payment;
 use AppBundle\Entity\User;
+use AppBundle\Service\BookingService;
+use AppBundle\Service\DealService;
+use AppBundle\Service\PaymentService;
+use AppBundle\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -25,6 +29,30 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DealController extends Controller
 {
+    private $dealService;
+    private $userService;
+    private $bookingService;
+    private $paymentService;
+
+    /**
+     * DealController constructor.
+     * @param BookingService $bookingService
+     * @param DealService $dealService
+     * @param PaymentService $paymentService
+     * @param UserService $userService
+     */
+    public function __construct(BookingService $bookingService,
+                                DealService $dealService,
+                                PaymentService $paymentService,
+                                UserService $userService)
+    {
+        $this->dealService = $dealService;
+        $this->userService = $userService;
+        $this->bookingService= $bookingService;
+        $this->paymentService= $paymentService;
+    }
+
+
     /**
      * Lists all deals entities.
      *
@@ -34,9 +62,10 @@ class DealController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $deals = $em->getRepository('AppBundle:Deal')->findAll();
+        $deals=$this->dealService->findAll();
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $deals = $em->getRepository('AppBundle:Deal')->findAll();
 
         return $this->render('deal/index.html.twig', array(
             'deals' => $deals,
@@ -54,27 +83,24 @@ class DealController extends Controller
      */
     public function newAction(Request $request, $booking_id)
     {
-
-
         /** @var User $bookerId */
         $bookerId=$this->getUser()?:null;
 
         if ($bookerId==null)
         {
+            $this->addFlash('notice',
+                'To oreder a car you should first to login/ register. ');
             return $this->redirectToRoute('security_login');// да се довърши
         }
 
         $userId=$bookerId->getId();
-        $user= $this->getDoctrine()->getManager()
-                    ->getRepository(User::class)->find($userId);
-
-
+        $user=$this->userService->find($userId);
 
        $deal = new Deal();
        $id=$booking_id;
-       $booking=$this->getDoctrine()->getManager()
-                     ->getRepository(Booking::class)
-                     ->findCarAndBooking($id);
+       $bookingArray=$this->bookingService->findCarAndBooking($id);
+
+       $booking=$bookingArray[0];//куерито връща масив, от който вадя обекта.
 
        $car=$booking->getCar();
        $deal->setUser($user);
@@ -89,7 +115,8 @@ class DealController extends Controller
        $deal->setDealPrice($rentPrice);
 
        //до тук работи!
-       $payment=$this->getDoctrine()->getManager()->getRepository(Payment::class)->findAll();
+        $payment=$this->paymentService->findAll();
+      // $payment=$this->getDoctrine()->getManager()->getRepository(Payment::class)->findAll();
        $paymentForm=$this->createFormBuilder($payment)
            ->add('Payment', ChoiceType::class,array(
                'choices'=>array(
@@ -107,9 +134,15 @@ class DealController extends Controller
 
         if ($paymentForm->isSubmitted() && $paymentForm->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($deal);
-            $em->flush();
+//            $paymentType= $paymentForm->get('Payment')->getData(); //getting choosen data from form.
+//            $deal->setPayment($paymentType);
+
+
+           $this->dealService->save($deal);
+
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($deal);
+//            $em->flush();
 
 
             return $this->redirectToRoute('deal_show', array('id' => $deal->getId()));

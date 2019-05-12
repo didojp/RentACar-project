@@ -104,8 +104,10 @@ class CarController extends Controller
 //            $em = $this->getDoctrine()->getManager();
 //            $em->persist($car);
 //            $em->flush();
+          //  $id= $this->carService->lastInsertedId();
 
-            return $this->redirectToRoute('car_show', array('id' => $car->getId()));
+         //   return $this->redirectToRoute('car_index');
+          return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }
 
         return $this->render('car/new.html.twig', array(

@@ -83,7 +83,7 @@ class Car
 
     /**
      * @var boolean
-     * @ORM\Column(name="is_booked", type="boolean", nullable=false)
+     * @ORM\Column(name="is_booked", type="boolean", options={"default"="0"},nullable=true)
      */
     private $isBooked;
 
@@ -96,7 +96,7 @@ class Car
     /**
      * @return bool
      */
-    public function isBooked(): bool
+    public function isBooked(): ?bool
     {
         return $this->isBooked;
     }

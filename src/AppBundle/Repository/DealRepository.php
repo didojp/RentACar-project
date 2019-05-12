@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Deal;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
 use Doctrine\ORM\NonUniqueResultException;
 
 /**
@@ -12,5 +15,59 @@ use Doctrine\ORM\NonUniqueResultException;
  */
 class DealRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new Mapping\ClassMetadata(Deal::class));
+    }
+
+
+    public function save(Deal $deal)
+    {
+        try{
+            $this->_em->persist($deal);
+            $this->_em->flush();
+
+            return true;
+
+        }catch (\Exception $exception){
+
+            return false;
+        }
+    }
+
+    public function update(Deal $deal)
+    {
+        try{
+            $this->_em->merge($deal);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $exception){
+
+            return false;
+        }
+    }
+    public function delete(Deal $id)
+    {
+        try{
+            $this->_em->remove($id);
+            $this->_em->flush();
+            return false;
+
+        }catch (\Exception $exception){
+            return false;
+        }
+
+    }
+
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return parent::find($id, $lockMode, $lockVersion);
+    }
+
+    public function findAll()
+    {
+        return parent::findAll();
+    }
 
 }
