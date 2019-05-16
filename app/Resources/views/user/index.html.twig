@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main %}
     <h1>Users list</h1>
 
-    <table>
-        <thead>
+    <table border="1" style="border-collapse: collapse" bgcolor="#bdb76b">
+        <thead style="border-collapse: collapse">
             <tr>
                 <th>Id</th>
                 <th>Username</th>
@@ -41,9 +41,6 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_new') }}">Create a new user</a>
-        </li>
-    </ul>
+       <a class="btn btn-xs btn-warning" href="{{ path('user_new') }}">create new user</a>
+
 {% endblock %}

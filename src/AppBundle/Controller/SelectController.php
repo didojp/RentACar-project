@@ -51,10 +51,6 @@ class SelectController extends Controller
         $transmision=$this->transmisionService->findAll();
         $category=$this->categoryService->findAll();
 
-//        $em = $this->getDoctrine()->getManager();
-//        $transmision = $em->getRepository('AppBundle:Transmision')->findAll();
-//        $category= $em->getRepository('AppBundle:Category')->findAll();
-
 
         $transmisionForm= $this->createFormBuilder()
                               ->add("transmision", EntityType::class,
@@ -63,13 +59,15 @@ class SelectController extends Controller
                               ->add("category", EntityType::class,
                                           ['class'=>Category::class,
                                             'choice_label'=>'categoryName'])
-                              ->add("save", SubmitType::class)
+                              ->add("search", SubmitType::class)
                               ->getForm();
 
        $transmisionForm->handleRequest($request);
 
         if ($transmisionForm->isSubmitted())
         {
+            dump('tuk sme');
+            exit;
             $transmision=$transmisionForm->get('transmision')->getData()->getId();
             $category=$transmisionForm->get('category')->getData()->getId();
 

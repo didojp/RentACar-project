@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Deals list</h1>
+{% block main %}
+    <h1 style="align-content: center">Deals list</h1>
 
-    <table border="1" bgcolor="#bdb76b">
+    <table border="1" style="border-collapse: collapse" bgcolor="#bdb76b">
         <thead>
             <tr>
                 <th>Deal_Id</th>
@@ -28,15 +28,12 @@
                 <td>{% if deals.toDate %}{{ deals.toDate|date('Y-m-d') }}{% endif %}</td>
 
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('deal_show', { 'id': deals.id }) }}">show</a>
-                        </li>
-
-                        <li>
-                            <a href="{{ path('deal_edit', { 'id': deals.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <div class="form-group">
+                        <div class="btn-group-xs">
+                            <a class="btn btn-primary btn-success" href="{{ path('deal_show',{'id': deals.id}) }}">SHOW</a>
+                            <a class="btn btn-primary btn-warning" href="{{ path('deal_edit',{'id': deals.id}) }}">EDIT</a>
+                        </div>
+                    </div>
                 </td>
 
             </tr>

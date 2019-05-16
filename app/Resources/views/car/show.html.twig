@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block body %}
+{% block main %}
     <h1>Car</h1>
     {% block selectBar %}{% endblock %}
     <table>
@@ -42,30 +42,23 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('car_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('booking_new',{ 'car_id': car.id})}}">Book this car</a>
-        </li>
-        {% if app.user != null %}
-            {% if app.user.isAdmin or app.user.isModerator %}
-                <li>
-                    <a href="{{ path('car_edit', { 'id': car.id }) }}">Edit</a>
-                </li>
-                <li>
-                    <a href="{{ path('car_delete', {'id': car.id}) }}">Delete</a>
-                </li>
-                {#<li>#}
-                {#{{ form_start(delete_form) }}#}
-                {#<input type="submit" value="Delete">#}
-                {#{{ form_end(delete_form) }}#}
-                {#</li>#}
-            {% endif %}
+    <div class="form-group">
+      <div class="btn-group-xs">
+           <a class="btn btn-primary btn-success" href="{{ path('car_index') }}">Back to the list</a>
+           <a class="btn btn-primary btn-success" href="{{ path('booking_new',{ 'car_id': car.id}) }}">Book this car</a>
+
+    {% if app.user != null %}
+        {% if app.user.isAdmin or app.user.isModerator %}
+
+            <a class="btn btn-primary btn-success"  href="{{ path('car_edit',{ 'id': car.id}) }}">EDIT</a>
+            <a class="btn btn-primary btn-success"  href="{{ path('car_delete', { 'id': car.id }) }}">DELETE</a>
+       </div>
+    </div>
+
         {% endif %}
+    {% endif %}
 
 
-    </ul>
+
 {% endblock %}
 

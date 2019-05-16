@@ -59,10 +59,10 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
         }
     }
 
-    public function delete(Car $id)
+    public function delete(Car $car)
     {
         try{
-            $this->_em->remove($id);
+            $this->_em->remove($car);
             $this->_em->flush();
 
             return true;

@@ -135,7 +135,7 @@ class CarController extends Controller
 
     /**
      * Deletes a car entity.
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/{id}/delete", name="car_delete")
      * @Method("POST")
      * @param Request $request
@@ -152,7 +152,7 @@ class CarController extends Controller
     }
     /**
      * Displays a form to edit an existing car entity.
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/{id}/edit", name="car_edit")
      * @Method({"GET", "POST"})
      */

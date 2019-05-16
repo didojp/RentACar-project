@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main %}
     {% for message in app.flashes('notice') %}
         <div class="flash-notice">
             {{ message }}
@@ -21,15 +21,12 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
-        </li>
-        <li>
-            <a href="{{ path('category_delete', {'id': category.id}) }}">Delete</a>
-        </li>
-    </ul>
+<div class="form-group">
+    <div class="btn-group-xs">
+        <a class="btn btn-primary btn-success" href="{{ path('category_index') }}">BACK TO THE LIST</a>
+        <a class="btn btn-primary btn-success" href="{{ path('category_edit', { 'id': category.id }) }}">EDIT</a>
+        <a class="btn btn-primary btn-warning" href="{{ path('category_delete',{'id': category.id }) }}">DELETE</a>
+    </div>
+</div>
+
 {% endblock %}

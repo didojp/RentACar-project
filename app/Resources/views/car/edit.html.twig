@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main %}
     {% for message in app.flashes('notice') %}
         <div class="flash-notice">
-            {{ message }}
+            <p style="background-color: #aacd4e">{{ message }}</p>
         </div>
     {% endfor %}
     <div class="container body-content span=8 offset=2"> {# за да възприеме файлът на снимката#}
@@ -26,13 +26,19 @@
             </form>
         </div>
     </div>
-    <ul>
-        <li>
-            <a href="{{ path('car_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('car_delete', {'id': car.id}) }}">Delete</a>
-        </li>
-    </ul>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-4">
+            <a class="btn btn-default" href="{{ path('car_index') }}">Back to the list</a>
+            <a class="btn btn-danger" href="{{ path('car_delete', {'id': car.id}) }}">Delete</a>
+        </div>
+    </div>
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('car_index') }}">Back to the list</a>#}
+        {#</li>#}
+        {#<li>#}
+            {#<a href="{{ path('car_delete', {'id': car.id}) }}">Delete</a>#}
+        {#</li>#}
+    {#</ul>#}
 {% endblock %}
 

@@ -1,11 +1,12 @@
+{% extends 'base.html.twig' %}
 
 {% for message in app.flashes('notice') %}
     <div class="flash-notice">
-        {{ message }}
+        <p style="background-color: #aacd4e">{{ message }}</p>
     </div>
 {% endfor %}
 
-{% block body %}
+{% block main %}
     <h1>Bookings list</h1>
 
     <table border="1" bgcolor="#bdb76b">
