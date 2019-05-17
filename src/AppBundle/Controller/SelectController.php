@@ -66,8 +66,7 @@ class SelectController extends Controller
 
         if ($transmisionForm->isSubmitted())
         {
-            dump('tuk sme');
-            exit;
+
             $transmision=$transmisionForm->get('transmision')->getData()->getId();
             $category=$transmisionForm->get('category')->getData()->getId();
 

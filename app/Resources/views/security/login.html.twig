@@ -1,16 +1,15 @@
-{#{% extends 'base.html.twig' %}#}
+{% extends 'base.html.twig' %}
 
-{% if error %}
- <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
 
- {% for message in app.flashes('notice') %}
-     <div class="flash-notice">
-         {{ message }}
-     </div>
- {% endfor %}
-
-{% block login %}
+{% block main %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
 <form name="authenticate" action="{{ path('security_login') }}" method="post">
     <label for="userName">Username:</label>
         <input type="text"  class="form-control" id="userName" name="_username" >

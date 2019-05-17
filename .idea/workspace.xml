@@ -2,40 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="392cf545-ee42-4148-a3a6-695869a830c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/car/newIndex.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/bookedCar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/booking/bookedCar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/carBooking.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/booking/carBooking.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/indexBooking.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/booking/indexBooking.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/wrongDateTime.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/booking/wrongDateTime.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/selected.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/selected.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/showSelected.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/showSelected.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/deal/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/deal/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/deal/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/deal/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/deal/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/deal/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/deal/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/deal/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/transmision/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/transmision/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/transmision/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/transmision/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/transmision/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/transmision/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/transmision/select.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/transmision/select.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/transmision/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/transmision/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/user/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/user/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/user/header.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/user/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/user/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CarController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CarController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/SelectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/SelectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/CarRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/CarRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,48 +74,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SelectController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
+              <folding>
+                <element signature="e#3844#3874#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/user/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-                <element signature="n#style#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/user/edit.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/car/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="52" column="109" lean-forward="true" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="109" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/deal/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="73" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="73" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="13" column="44" lean-forward="true" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -172,7 +125,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/AppBundle/Service/UserService.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/UserServiceInterface.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/BookingServiceInterface.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/BookingRepository.php" />
@@ -209,7 +161,6 @@
         <option value="$PROJECT_DIR$/app/Resources/views/user/show.html.twig" />
         <option value="$PROJECT_DIR$/web/css/style.css" />
         <option value="$PROJECT_DIR$/web/css/sidenav.css" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/SelectController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/car/edit.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/transmision/select.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/booking/indexBooking.html.twig" />
@@ -223,6 +174,8 @@
         <option value="$PROJECT_DIR$/app/Resources/views/category/show.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/deal/index.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/user/index.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/SelectController.php" />
       </list>
     </option>
   </component>
@@ -280,7 +233,7 @@
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
@@ -529,7 +482,7 @@
       <workItem from="1557236505476" duration="42793000" />
       <workItem from="1557501515446" duration="159000" />
       <workItem from="1557698484614" duration="31417000" />
-      <workItem from="1557945692438" duration="23464000" />
+      <workItem from="1557945692438" duration="29560000" />
     </task>
     <servers />
   </component>
@@ -539,7 +492,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="665788000" />
+    <option name="totallyTimeSpent" value="671884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -655,9 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/security/login.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/transmision/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -740,13 +690,6 @@
           <folding>
             <element signature="e#116#149#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SelectController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="69" column="17" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -882,13 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/phpstorm.jar!/resources/html5-schema/html5/legacy.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -906,16 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/deal/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="73" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="73" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/car/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -923,13 +849,6 @@
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/car/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="52" column="109" lean-forward="true" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="109" />
         </state>
       </provider>
     </entry>
@@ -943,14 +862,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/security/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/deal/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="5" column="73" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="73" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/user/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+        <state relative-caret-position="340">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
             <element signature="n#style#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SelectController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+          <folding>
+            <element signature="e#3844#3874#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/car/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="44" lean-forward="true" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
         </state>
       </provider>
     </entry>
