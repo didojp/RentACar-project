@@ -1,0 +1,12 @@
+
+
+{% block main %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            <p style="background-color: #aacd4e">{{ message }}</p>
+        </div>
+    {% endfor %}
+    {{ form_start(myform) }}
+    {{ form_row(myform) }}
+    {{ form_end(myform) }}
+{% endblock %}

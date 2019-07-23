@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1 style="align-content: center">Deals list</h1>
+
+    <table border="1" style="border-collapse: collapse" bgcolor="#bdb76b">
+        <thead>
+            <tr>
+                <th>Deal_Id</th>
+                <th>Username</th>
+                <th>Car</th>
+                <th>Deal_Price</th>
+                <th>Number of days</th>
+                <th>From date</th>
+                <th>To date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for deals in deals %}
+            <tr>
+                <td><a href="{{ path('deal_show', { 'id': deals.id }) }}">{{ deals.id }}</a></td>
+                <td>{{ deals.user.userName }}</td>
+                <td>{{ deals.car.id }}</td>
+                <td>{{ deals.dealPrice }}</td>
+                <td>{{ deals.numberOfDays }}</td>
+                <td>{% if deals.fromDate %}{{ deals.fromDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if deals.toDate %}{{ deals.toDate|date('Y-m-d') }}{% endif %}</td>
+
+                <td>
+                    <div class="form-group">
+                        <div class="btn-group-xs">
+                            <a class="btn btn-primary btn-success" href="{{ path('deal_show',{'id': deals.id}) }}">SHOW</a>
+                            <a class="btn btn-primary btn-warning" href="{{ path('deal_edit',{'id': deals.id}) }}">EDIT</a>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

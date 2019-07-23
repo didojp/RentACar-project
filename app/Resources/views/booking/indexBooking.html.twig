@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% for message in app.flashes('notice') %}
+    <div class="flash-notice">
+        <p style="background-color: #aacd4e">{{ message }}</p>
+    </div>
+{% endfor %}
+
+{% block main %}
+    <h1>Bookings list</h1>
+
+    <table border="1" bgcolor="#bdb76b">
+        <thead>
+        <tr>
+            <th>Booking_Id</th>
+            <th>Car</th>
+            <th>Car_Price</th>
+            <th>Number of days</th>
+            <th>From date</th>
+            <th>To date</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.id }}</a></td>
+                <td>{{ booking.car.id }}</td>
+                <td>{{ booking.price }}</td>
+                <td>{{ booking.numberOfDays }}</td>
+                <td>{% if booking.fromDate %}{{ booking.fromDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if booking.toDate %}{{ booking.toDate|date('Y-m-d') }}{% endif %}</td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <ul>
+        <a href="{{ path('booking_deleteall') }}">Delete all</a>
+    </ul>
+
+
+{% endblock %}

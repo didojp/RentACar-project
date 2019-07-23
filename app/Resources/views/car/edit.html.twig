@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            <p style="background-color: #aacd4e">{{ message }}</p>
+        </div>
+    {% endfor %}
+    <div class="container body-content span=8 offset=2"> {# за да възприеме файлът на снимката#}
+        <div class="well">
+            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('car_edit', {id: car.id}) }}" method="post">
+                <fieldset>
+                    <legend><h1>Car edit</h1></legend>
+                    {{ form_start(edit_form) }}
+                    {{ form_row(edit_form.make) }}
+                    {{ form_row(edit_form.model) }}
+                    {{ form_row(edit_form.price) }}
+                    {{ form_row(edit_form.transmision) }}
+                    {{ form_row(edit_form.category) }}
+                    {{ form_row(edit_form.seats) }}
+                    {{ form_row(edit_form.image )}}
+                    {{ form_widget(edit_form) }}
+                    <input type="submit" value="Edit" />
+                    {{ form_end(edit_form) }}
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-4">
+            <a class="btn btn-default" href="{{ path('car_index') }}">Back to the list</a>
+            <a class="btn btn-danger" href="{{ path('car_delete', {'id': car.id}) }}">Delete</a>
+        </div>
+    </div>
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('car_index') }}">Back to the list</a>#}
+        {#</li>#}
+        {#<li>#}
+            {#<a href="{{ path('car_delete', {'id': car.id}) }}">Delete</a>#}
+        {#</li>#}
+    {#</ul>#}
+{% endblock %}
+

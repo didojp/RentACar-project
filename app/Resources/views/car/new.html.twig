@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <div class="container body-content span=8 offset=2"> {# за да възприеме файлът на снимката#}
+      <div class="well">
+          <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('car_new') }}" method="post">
+              <fieldset>
+                  <legend><h1>Car creation</h1></legend>
+                  {{ form_start(form) }}
+                  {{ form_row(form.make) }}
+                  {{ form_row(form.model) }}
+                  {{ form_row(form.price) }}
+                  {{ form_row(form.transmision) }}
+                  {{ form_row(form.category) }}
+                  {{ form_row(form.seats) }}
+                  {{ form_row(form.image) }}
+                  {{ form_widget(form) }}
+                  <input type="submit" value="Create" />
+                  {{ form_end(form) }}
+              </fieldset>
+          </form>
+      </div>
+    </div>
+    <ul>
+        <li>
+            <a href="{{ path('car_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>Transmisions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Transmisiontype</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transmision in transmisions %}
+            <tr>
+                <td><a href="{{ path('transmision_show', { 'id': transmision.id }) }}">{{ transmision.id }}</a></td>
+                <td>{{ transmision.transmisionModel }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('transmision_show', { 'id': transmision.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('transmision_edit', { 'id': transmision.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('transmision_new') }}">Create a new transmision</a>#}
+        {#</li>#}
+    {#</ul>#}
+{% endblock %}

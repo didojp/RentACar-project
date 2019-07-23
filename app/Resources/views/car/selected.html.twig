@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+
+    <h1>Selected Cars list</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Transmission</th>
+            <th>Category</th>
+            <th>Number of seats</th>
+            <th>Price</th>
+            <th>     </th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <td><a href="{{ path('car_show', { 'id': car.id }) }}">{{ car.id }}</a></td>
+                <td>{{ car.make }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.transmision }}</td>
+                <td>{{ car.category }}</td>
+                <td>{{ car.seats }}</td>
+                <td>{{ car.price }}</td>
+                <td><a href="{{ path('car_show', {'id': car.id}) }}">
+                        <img src="{{ asset('uploads/images/'~ car.image) }}" width="350" height="200" > </a>
+                </td>
+                <td><a href="{{ path('booking_new',{ 'car_id': car.id}) }}">Book this car</a> </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

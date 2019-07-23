@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            <p style="background-color: #aacd4e">{{ message }}</p>
+        </div>
+    {% endfor %}
+    <div class="sidenav col-sm-4">
+        {{ render(controller('AppBundle:Select:select')) }}
+    </div>
+    <div class="col-sm-8">
+        <h1>CARS LIST</h1>
+        <div class="container body-content">
+            <div class="row">
+                {% for car in pagination %}
+                    <div class="col-sm-5">
+                        <section>
+                            <header>
+                                <h4>{{ car.make }}&nbsp{{ car.model }}</h4>
+                            </header>
+
+                            <a href="{{ path('car_show', {'id': car.id}) }}">
+
+                                <img src="{{ asset('uploads/images/'~ car.image) }}" width="350" height="200"> </a>
+                            <p>transmision: {{ car.transmision }}</p>
+                            <p>category: {{ car.category }}</p>
+                            <p>number of seats: {{ car.seats }}</p>
+                            <p>price: {{ car.price }}</p>
+
+                            <div class="form-group">
+                                <div class="btn-group-xs">
+                                    <a class="btn btn-primary btn-success"
+                                       href="{{ path('booking_new',{ 'car_id': car.id}) }}">book this car</a>
+                                    <a class="btn btn-primary btn-success"
+                                       href="{{ path('car_show', { 'id': car.id }) }}">show more</a>
+                                </div>
+                            </div>
+
+                            {% if app.user != null %}
+                                {% if app.user.isAdmin or app.user.isModerator %}
+                                    <a class="btn btn-xs btn-danger" href="{{ path('car_edit', { 'id': car.id }) }}">EDIT</a>
+                                {% endif %}
+                            {% endif %}
+                        </section>
+                    </div>
+                {% endfor %}
+
+                <div class="col-md-6">
+                    {% if app.user != null %}
+                        {% if app.user.isAdmin or app.user.isModerator %}
+
+                            <a class="btn btn-xs btn-warning" href="{{ path('car_new') }}">create new car</a>
+
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

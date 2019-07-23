@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>Transmision</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ transmision.id }}</td>
+            </tr>
+            <tr>
+                <th>Transmisiontype</th>
+                <td>{{ transmision.transmisionModel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('transmision_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('transmision_edit', { 'id': transmision.id }) }}">Edit</a>
+        </li>
+    </ul>
+{% endblock %}

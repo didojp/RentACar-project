@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>Deal</h1>
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ deals.id }}</td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td><img src="{{ asset('uploads/images/' ~ deals.car.image) }}" width="350" height="200"></td>
+            </tr>
+            <tr>
+                <th>User:</th>
+                <td>{{ deals.user.userName }}</td>
+            </tr>
+            <tr>
+                <th>Car Id:</th>
+                <td>{{ deals.car.id }}</td>
+            </tr>
+            <tr>
+                <th>Car make:</th>
+                <td>{{ deals.car.make }}</td>
+            </tr>
+            <tr>
+                <th>Car model:</th>
+                <td>{{ deals.car.model }}</td>
+            </tr>
+            <tr>
+                <th>Car transmision:</th>
+                <td>{{ deals.car.transmision }}</td>
+            </tr>
+
+            <tr>
+                <th>From date:</th>
+                <td>{{ deals.fromDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>To date:</th>
+                <td>{{ deals.toDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Number of day:</th>
+                <td>{{ deals.numberOfDays }}</td>
+            </tr>
+            <tr>
+                <th>Price per day:</th>
+                <td>{{ deals.car.price }}</td>
+            </tr>
+            <tr>
+                <th>Total price:</th>
+                <td>{{ deals.dealPrice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% if app.user != null %}
+          {% if app.user.isAdmin or app.user.isModerator %}
+
+    <ul>
+        <li>
+            <a href="{{ path('deal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('deal_edit', { 'id': deals.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+          {% endif %}
+{% endif %}
+
+
+    {#<footer>#}
+        {#<div class="pull-right">#}
+            {#{% if app.getUser().isAdmin and app.getUser().isModerator %}#}
+            {#<a class="btn btn-danger btn-xs" href="{{ path('deal_edit', { 'id': deals.id }) }}">Edit</a>#}
+            {#{% endif %}#}
+        {#</div>#}
+    {#</footer>#}
+
+{% endblock %}
+
