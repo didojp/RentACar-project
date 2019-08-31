@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h3> Are you sure you want to delete this car?</h3>
+    {{ form_start(delete_form) }}
+    {{ form_widget(delete_form) }}
+    <div>
+        <button type="submit" class="btn btn-primary btn-danger">DELETE</button>
+        <a class="btn btn-primary bg-warning" href="{{ path('car_show',{'id': car.id})}}">CANCEL</a>
+    </div>
+    {{ form_end(delete_form) }}
+{% endblock %}
+

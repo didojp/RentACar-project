@@ -7,32 +7,26 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CarType extends AbstractType
+class ExtraType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('make')
-            ->add('model')
-            ->add('price')
-            ->add('transmision')
-            ->add('category')
-            ->add('seats')
-            ->add('image', FileType::class,['label'=>'Car_Image','data'=>null]);
-
-        //https://symfony.com/doc/3.4/controller/upload_file.html
+            ->add('name')
+            ->add('description')
+            ->add('image',FileType::class,['label'=>'Extra_Image','data'=>null])
+            ->add('price');
     }
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Car'
+            'data_class'=>'AppBundle\Entity\Extra'
         ));
+
     }
 
     /**
@@ -40,8 +34,6 @@ class CarType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_car';
+        return 'appbundle_extra';
     }
-
-
 }

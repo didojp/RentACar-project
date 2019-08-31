@@ -77,6 +77,16 @@ class Deal
     private $carPrice;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Extra", mappedBy="deals")
+     */
+    private $extras;
+
+    public function __construct()
+    {
+        $this->extras= new ArrayCollection();
+    }
+
+    /**
      * @return mixed
      */
     public function getCarPrice()
@@ -252,6 +262,13 @@ class Deal
     public function setDealPrice(string $dealPrice): void
     {
         $this->dealPrice = $dealPrice;
+    }
+
+    public function addExtra(Extra $extra)
+    {
+        $extra->addDeal($this);
+        $this->extras[]=$extra;
+
     }
 
 

@@ -1,0 +1,68 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script>
+        setTimeout(function () {
+            $('#msg').fadeOut();
+        }, 3000)
+
+    </script>
+{% endblock %}
+{% block mainExtras %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            <p style="background-color: #aacd4e">{{ message }}</p>
+        </div>
+    {% endfor %}
+    <div class="col-sm-8">
+        <h1>EXTRAS</h1>
+        <div class="container body-content">
+            <div class="row">
+                {% for extra in pagination %}
+                    <div class="col-sm-5">
+                        <section>
+                            <header>
+                                <h4>{{ extra.name }}</h4>
+                            </header>
+
+                            <a href="{{ path('extra_show', {'id': extra.id}) }}">
+
+                                <img src="{{ asset('uploads/extras/'~ extra.image) }}" width="300" height="150"> </a>
+{#                            <p>description: {{ extra.description }}</p>#}
+                            <p>price per day: {{ extra.price }}</p>
+
+                            <div class="form-group">
+                                <div class="btn-group-xs">
+                                    <button class="btn btn-primary btn-success"
+                                       href="{{ path('extra_show', { 'id': extra.id }) }}">show more</button>
+                                </div>
+                            </div>
+
+                            {% if app.user != null %}
+                                {% if app.user.isAdmin or app.user.isModerator %}
+                                    <button class="btn btn-xs btn-danger" href="{{ path('extra_edit', { 'id': extra.id }) }}">EDIT</button>
+                                {% endif %}
+                            {% endif %}
+                        </section>
+                    </div>
+                {% endfor %}
+
+                <div class="col-md-6">
+                    {% if app.user != null %}
+                        {% if app.user.isAdmin or app.user.isModerator %}
+                            <p>
+                                <button class="btn btn-xs btn-warning" href="{{ path('extra_new') }}">create new extra</button>
+                            </p>
+
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

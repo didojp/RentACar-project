@@ -29,6 +29,12 @@
 
                            {% if app.user %}
                                <li>
+                                   <a href="{{ path('show_news') }}">NEWS</a>
+                               </li>
+                               <li>
+                                   <a href="{{ path('aboutUs_action') }}">ABOUT US</a>
+                               </li>
+                               <li>
                                    <a href="{{ path('security_logout') }}">LOGOUT</a>
                                </li>
                            {% else %}

@@ -6,7 +6,9 @@
             <p style="background-color: #aacd4e">{{ message }}</p>
         </div>
     {% endfor %}
-    {{ form_start(myform) }}
+    {{ form_start(myform, {'action': path('select_action'), 'method': 'POST'}) }}
     {{ form_row(myform) }}
     {{ form_end(myform) }}
 {% endblock %}
+
+{#https://symfony.com/doc/3.4/form/action_method.html#}

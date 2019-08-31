@@ -134,21 +134,40 @@ class CarController extends Controller
     }
 
     /**
-     * Deletes a car entity.
-     * @Security("has_role('ROLE_MODERATOR')")
-     * @Route("/{id}/delete", name="car_delete")
-     * @Method("POST")
+     *
+     * @Security("has_role('ROLE_ADMIN','ROLE_MODERATOR')")
+     * @Route("/{id}/delete", name="car_delete", methods={"GET","POST"})
      * @param Request $request
      * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function deleteAction($id)
+    public function deleteAction(Request $request, $id)
     {
-        $car=$this->carService->find($id);
-        $this->carService->delete($car);
-        $this->addFlash('notice', 'The car was deleted successfully!');
 
-        return $this->redirectToRoute('car_index');
+        $car=$this->carService->find($id);
+        $form=$this->createDeleteForm($car);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()&&$request->getMethod()=="POST"){
+            $this->carService->delete($car);
+            $this->addFlash('notice', 'The car was successfully deleted');
+
+            return $this->redirectToRoute('car_index');
+        }
+
+
+        return $this->render('car/delete_confirm.html.twig', array(
+            'delete_form'=>$form->createView(),
+            'car'=>$car,
+        ));
+
+    }
+    private function createDeleteForm(Car $car)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('car_delete', array('id'=>$car->getId())))
+            ->setMethod('POST')
+            ->getForm()
+            ;
     }
     /**
      * Displays a form to edit an existing car entity.

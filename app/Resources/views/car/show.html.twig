@@ -51,7 +51,7 @@
         {% if app.user.isAdmin or app.user.isModerator %}
 
             <a class="btn btn-primary btn-success"  href="{{ path('car_edit',{ 'id': car.id}) }}">EDIT</a>
-            <a class="btn btn-primary btn-success"  href="{{ path('car_delete', { 'id': car.id }) }}">DELETE</a>
+            <a class="btn btn-primary btn-danger"  href="{{ path('car_delete', { 'id': car.id }) }}">DELETE</a>
        </div>
     </div>
 

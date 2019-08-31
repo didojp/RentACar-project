@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            <p style="background-color: #aacd4e">{{ message }}</p>
+        </div>
+    {% endfor %}
     <h3>Car Booking</h3>
+    <h5>Please choose a time period for your rental</h5>
     {{ form(bookingForm) }}
 {% endblock %}

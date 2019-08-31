@@ -63,9 +63,6 @@ class DealController extends Controller
     public function indexAction()
     {
         $deals=$this->dealService->findAll();
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $deals = $em->getRepository('AppBundle:Deal')->findAll();
 
         return $this->render('deal/index.html.twig', array(
             'deals' => $deals,
@@ -100,7 +97,7 @@ class DealController extends Controller
        $id=$booking_id;
        $bookingArray=$this->bookingService->findCarAndBooking($id);
 
-       $booking=$bookingArray[0];//куерито връща масив, от който вадя обекта.
+       $booking=$bookingArray[0];
 
        $car=$booking->getCar();
        $deal->setUser($user);
@@ -114,9 +111,8 @@ class DealController extends Controller
        $rentPrice=$carPrice*$numberOfDays;
        $deal->setDealPrice($rentPrice);
 
-       //до тук работи!
+
         $payment=$this->paymentService->findAll();
-      // $payment=$this->getDoctrine()->getManager()->getRepository(Payment::class)->findAll();
        $paymentForm=$this->createFormBuilder($payment)
            ->add('Payment', ChoiceType::class,array(
                'choices'=>array(
@@ -130,20 +126,8 @@ class DealController extends Controller
 
         $paymentForm->handleRequest($request);
 
-       //Here should set the payment logic;
-
         if ($paymentForm->isSubmitted() && $paymentForm->isValid()) {
-
-//            $paymentType= $paymentForm->get('Payment')->getData(); //getting choosen data from form.
-//            $deal->setPayment($paymentType);
-
-
            $this->dealService->save($deal);
-
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($deal);
-//            $em->flush();
-
 
             return $this->redirectToRoute('deal_show', array('id' => $deal->getId()));
         }

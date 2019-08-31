@@ -33,8 +33,7 @@ class BookingController extends Controller
 
     /**
      * @Security("is_granted('ROLE_MODERATOR')")
-     * @Route("/booking",name="booking_index")
-     * @Method("GET")
+     * @\Symfony\Component\Routing\Annotation\Route("/booking",name="booking_index",methods={"GET"})
      * @return Response
      */
     public function indexAction()
@@ -84,8 +83,6 @@ class BookingController extends Controller
         $booking->setPrice($car->getPrice());
         $bookingForm=$this->createForm('AppBundle\Form\BookingType', $booking);
         $bookingForm->handleRequest($request);
-
-
 
         if ($bookingForm->isValid()&&$bookingForm->isSubmitted())
         {

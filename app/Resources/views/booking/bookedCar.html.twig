@@ -1,58 +1,61 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <h1>Booked Car</h1>
-    <table>
-        <tbody>
+    <div>
+        <h1>Booked Car</h1>
+        <table>
+            <tbody>
 
-        <tr>
-            <th>Booking Id:</th>
-            <td>{{ booking.id }}</td>
-        </tr>
-        <tr>
-            <th>
-            </th>
-            <td><img src="{{ asset('uploads/images/' ~ booking.car.image) }}" width="350" height="200"></td>
-        </tr>
-        <tr>
-               <th>Car Id:</th>
-               <td>{{ booking.car.id }}</td>
-        </tr>
-        <tr>
-               <th>Car make:</th>
-               <td>{{ booking.car.make }}</td>
-        </tr>
-        <tr>
-               <th>Car model:</th>
-               <td>{{ booking.car.model }}</td>
-        </tr>
+            <tr>
+                <th>Booking Id:</th>
+                <td>{{ booking.id }}</td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td><img src="{{ asset('uploads/images/' ~ booking.car.image) }}" width="350" height="200"></td>
+            </tr>
+            <tr>
+                <th>Car Id:</th>
+                <td>{{ booking.car.id }}</td>
+            </tr>
+            <tr>
+                <th>Car make:</th>
+                <td>{{ booking.car.make }}</td>
+            </tr>
+            <tr>
+                <th>Car model:</th>
+                <td>{{ booking.car.model }}</td>
+            </tr>
 
-        <tr>
-            <th>From date:</th>
-            <td>{{ booking.fromDate|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>To date:</th>
-            <td>{{ booking.toDate|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Number of days:</th>
-            <td>{{ booking.numberOfDays }}</td>
-        </tr>
-        <tr>
-            <th>Price per day:</th>
-            <td>{{ booking.price }}</td>
-        </tr>
-        <tr>
-            <th>Total price:</th>
-            <td>{{ booking.totalPrice }}</td>
-        </tr>
-        </tbody>
-    </table>
-    <li>
-       <a href="{{ path('deal_new',{'booking_id': booking.id}) }}">Confirm</a>
-    </li>
+            <tr>
+                <th>From date:</th>
+                <td>{{ booking.fromDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>To date:</th>
+                <td>{{ booking.toDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Number of days:</th>
+                <td>{{ booking.numberOfDays }}</td>
+            </tr>
+            <tr>
+                <th>Price per day:</th>
+                <td>{{ booking.price }}</td>
+            </tr>
+            <tr>
+                <th>Total price:</th>
+                <td>{{ booking.totalPrice }}</td>
+            </tr>
+            </tbody>
+        </table>
+            <button href="{{ path('deal_new',{'booking_id': booking.id}) }}">Confirm</button>
+    </div>
 
+    <div>
+        {{ render(controller('AppBundle:Extra:index')) }}
+    </div>
 
 {% endblock %}
 
