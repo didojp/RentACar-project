@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="392cf545-ee42-4148-a3a6-695869a830c6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/bookedCar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/booking/bookedCar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/selected.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/selected.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/common/aboutUs.thml.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/common/aboutUs.thml.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DealController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DealController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -256,7 +250,7 @@
       <workItem from="1566456523137" duration="18534000" />
       <workItem from="1566654114045" duration="43697000" />
       <workItem from="1567242819516" duration="585000" />
-      <workItem from="1567244019111" duration="4176000" />
+      <workItem from="1567244019111" duration="6048000" />
     </task>
     <servers />
   </component>
