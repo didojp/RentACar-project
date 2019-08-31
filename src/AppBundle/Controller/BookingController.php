@@ -72,7 +72,6 @@ class BookingController extends Controller
      */
     public function newBookingAction(Request $request, $car_id)
     {
-
         $booking= new Booking();
         /** @var Car $car */
         $id=$car_id;

@@ -33,12 +33,14 @@
                         <img src="{{ asset('uploads/images/'~ car.image) }}" width="350" height="200" > </a>
                 </td>
                 <td><a href="{{ path('booking_new',{ 'car_id': car.id}) }}">Book this car</a> </td>
-
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
 
-
+    <div class="form-group">
+        <a class="btn btn-primary btn-success" href="{{ path('car_index') }}">BACK TO THE LIST</a>
+    </div>
 
 {% endblock %}

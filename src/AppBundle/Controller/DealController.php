@@ -72,21 +72,20 @@ class DealController extends Controller
     /**
      * Creates a new deals entity.
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @Route("/new/{booking_id}", name="deal_new")
-     * @Method({"GET", "POST"})
+     * @\Symfony\Component\Routing\Annotation\Route("/new/{booking_id}", name="deal_new", methods={"GET", "POST"})
      * @param Request $request
      * @param $booking_id
      * @return Response
      */
     public function newAction(Request $request, $booking_id)
     {
+        var_dump('tuk sme');
         /** @var User $bookerId */
         $bookerId=$this->getUser()?:null;
 
         if ($bookerId==null)
         {
-            $this->addFlash('notice',
-                'To oreder a car you should first to login/ register. ');
+            $this->addFlash('notice','To oreder a car you should first to login/ register. ');
             return $this->redirectToRoute('security_login');// да се довърши
         }
 

@@ -7,7 +7,7 @@
     {% endif %}
     {% for message in app.flashes('notice') %}
         <div class="flash-notice">
-            {{ message }}
+            <p style="background-color: #aacd4e">{{ message }}</p>
         </div>
     {% endfor %}
 <form name="authenticate" action="{{ path('security_login') }}" method="post">

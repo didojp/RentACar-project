@@ -50,7 +50,9 @@
             </tr>
             </tbody>
         </table>
-            <button href="{{ path('deal_new',{'booking_id': booking.id}) }}">Confirm</button>
+        <div class="form-group">
+            <a class="btn btn-primary btn-success" href="{{ path('deal_new',{'booking_id': booking.id}) }}">Confirm</a>
+        </div>
     </div>
 
     <div>

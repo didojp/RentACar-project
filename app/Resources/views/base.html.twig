@@ -25,15 +25,13 @@
                <div class="container">
                    <div class="navbar-collapse collapse">
                        <ul class="nav navbar-nav navbar-right">
-                           <li>Да се добавят items, които трябва</li>
-
+                           <li>
+                               <a href="{{ path('show_news') }}">NEWS</a>
+                           </li>
+                           <li>
+                               <a href="{{ path('aboutUs_action') }}">ABOUT US</a>
+                           </li>
                            {% if app.user %}
-                               <li>
-                                   <a href="{{ path('show_news') }}">NEWS</a>
-                               </li>
-                               <li>
-                                   <a href="{{ path('aboutUs_action') }}">ABOUT US</a>
-                               </li>
                                <li>
                                    <a href="{{ path('security_logout') }}">LOGOUT</a>
                                </li>

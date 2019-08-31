@@ -2,37 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="392cf545-ee42-4148-a3a6-695869a830c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/car/delete_confirm.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/common/aboutUs.thml.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/common/news.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/extra/delete_confirm.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/extra/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/extra/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/extra/new.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/extra/show.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CommonsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Controller/ExtraController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/ExtraType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Service/ExtraService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Service/ExtraServiceInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/uploads/underConstructionPages/UnderConstructionPage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/uploads/underConstructionPages/UnderConstructionPage1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e65d17d3-4547-425a-a79d-6e1bf1869a29.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e65d17d3-4547-425a-a79d-6e1bf1869a29.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RentACar-project" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/bookedCar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/booking/bookedCar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/carBooking.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/booking/carBooking.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/transmision/select.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/transmision/select.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/car/selected.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/car/selected.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/common/aboutUs.thml.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/common/aboutUs.thml.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CarController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CarController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DealController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DealController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Deal.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Deal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/CarType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/CarType.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +157,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="php.override.implement.member.chooser.php.doc" value="COPY_ALWAYS" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -278,6 +255,8 @@
       <workItem from="1566456418005" duration="59000" />
       <workItem from="1566456523137" duration="18534000" />
       <workItem from="1566654114045" duration="43697000" />
+      <workItem from="1567242819516" duration="585000" />
+      <workItem from="1567244019111" duration="4176000" />
     </task>
     <servers />
   </component>
