@@ -35,6 +35,9 @@
                                <li>
                                    <a href="{{ path('security_logout') }}">LOGOUT</a>
                                </li>
+                               {% if app.user.isAdmin or app.user.isModerator %}
+                                   <a class="btn btn-xs btn-danger" href="{{ path('admin_panel')}}">ADMINISTRATION</a>
+                               {% endif %}
                            {% else %}
                                <li>
                                    <a href="{{ path('user_new') }}">REGISTER</a>

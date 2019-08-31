@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h3>Administration panel</h3>
+    <ul>
+        <li>
+            <a href="{{ path('car_index')}}">CARS</a>
+        </li>
+        <li>
+            <a href="{{ path('transmision_index')}}">TRANSMISSION</a>
+        </li>
+        <li>
+            <a href="{{ path('category_index')}}">CATEGORIES</a>
+        </li>
+        <li>
+            <a href="{{ path('user_index')}}">USERS</a>
+        </li>
+        <li>
+            <a href="{{ path('booking_index')}}">BOOKINGS</a>
+        </li>
+        <li>
+            <a href="{{ path('deal_index')}}">DEALS</a>
+        </li>
+        <li>
+            <a href="{{ path('extra_index')}}">MANAGE EXTRAS</a>
+        </li>
+    </ul>
+
+{% endblock %}
